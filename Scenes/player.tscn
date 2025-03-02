@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://b7pomkmriwkpb"]
+
+[ext_resource type="Script" path="res://Scripts/Player.cs" id="1_jfecq"]
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_jfecq")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../AnimatedSprite2D")
+
+[node name="Hurtbox" type="CollisionShape2D" parent="."]
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="Hand" type="CollisionShape2D" parent="Hitbox"]
+
+[node name="Feet" type="CollisionShape2D" parent="Hitbox"]
+
+[node name="StateMachine" type="Node" parent="."]
+
+[node name="AttackCooldown" type="Timer" parent="."]

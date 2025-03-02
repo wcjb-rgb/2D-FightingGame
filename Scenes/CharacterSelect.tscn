@@ -1,0 +1,99 @@
+[gd_scene load_steps=13 format=3 uid="uid://cwwnhacuqx1e2"]
+
+[ext_resource type="Script" path="res://Scripts/CharacterSelect.cs" id="1_q8vug"]
+[ext_resource type="Texture2D" uid="uid://c77yqv0qtvnnp" path="res://Assets/CharSelect/dan.png" id="2_onfh6"]
+[ext_resource type="Texture2D" uid="uid://k6lma2x1n1kq" path="res://Assets/CharSelect/ken.png" id="3_5vki7"]
+[ext_resource type="Texture2D" uid="uid://bt8y2vwk23mse" path="res://Assets/CharSelect/random1.png" id="4_fleej"]
+[ext_resource type="Texture2D" uid="uid://cml3q1b6s36nr" path="res://Assets/CharSelect/chunli.png" id="5_76iyo"]
+[ext_resource type="Texture2D" uid="uid://mr8ixm48jv67" path="res://Assets/CharSelect/honda.png" id="6_k16y8"]
+[ext_resource type="Texture2D" uid="uid://ms1g1pnpxp54" path="res://Assets/CharSelect/cammy.png" id="7_0kuts"]
+[ext_resource type="Texture2D" uid="uid://cekjjmfbloxcx" path="res://Assets/CharSelect/blanka.png" id="8_it65v"]
+[ext_resource type="Texture2D" uid="uid://cuh350r4xox7q" path="res://Assets/CharSelect/random2.png" id="9_igx6r"]
+[ext_resource type="Texture2D" uid="uid://e8v6q8plgkvt" path="res://Assets/CharSelect/SelectionCursorPlayer1.png" id="10_cw14i"]
+[ext_resource type="Script" path="res://Scripts/Cursor.cs" id="11_kwns3"]
+[ext_resource type="Texture2D" uid="uid://cnkomhfjtx07r" path="res://Assets/CharSelect/SelectionCursorPlayer2.png" id="12_dyb6i"]
+
+[node name="CharacterSelect" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_q8vug")
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 15.275
+anchor_top = 10.062
+anchor_right = 15.275
+anchor_bottom = 10.062
+offset_left = -100.0
+offset_top = -36.48
+offset_right = 171.0
+offset_bottom = 89.52
+theme_override_constants/h_separation = 10
+columns = 5
+
+[node name="Dan" type="TextureRect" parent="GridContainer" groups=["Character"]]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("2_onfh6")
+
+[node name="Ken" type="TextureRect" parent="GridContainer" groups=["Character"]]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("3_5vki7")
+
+[node name="Random1" type="TextureRect" parent="GridContainer" groups=["Character"]]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("4_fleej")
+
+[node name="Chunli" type="TextureRect" parent="GridContainer" groups=["Character"]]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("5_76iyo")
+
+[node name="Honda" type="TextureRect" parent="GridContainer" groups=["Character"]]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("6_k16y8")
+
+[node name="Cammy" type="TextureRect" parent="GridContainer" groups=["Character"]]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("7_0kuts")
+
+[node name="Blanka" type="TextureRect" parent="GridContainer" groups=["Character"]]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("8_it65v")
+
+[node name="Random2" type="TextureRect" parent="GridContainer" groups=["Character"]]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("9_igx6r")
+
+[node name="Ken8" type="TextureRect" parent="GridContainer" groups=["Character"]]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("3_5vki7")
+
+[node name="Ken9" type="TextureRect" parent="GridContainer" groups=["Character"]]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("3_5vki7")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 1
+z_as_relative = false
+position = Vector2(527, 382)
+texture = ExtResource("10_cw14i")
+script = ExtResource("11_kwns3")
+player1Text = ExtResource("10_cw14i")
+player2Text = ExtResource("12_dyb6i")
+portraitOffset = Vector2(42, 36)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(605, 382)
+zoom = Vector2(1.99, 1.464)

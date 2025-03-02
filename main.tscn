@@ -1,0 +1,74 @@
+[gd_scene load_steps=10 format=3 uid="uid://yllcr4j4s2i5"]
+
+[ext_resource type="Shader" path="res://movingshader.gdshader" id="2_t3ke4"]
+[ext_resource type="Texture2D" uid="uid://cae1jhlc4vmr7" path="res://Assets/MainMenu/back0.png" id="2_xltru"]
+[ext_resource type="Texture2D" uid="uid://c3g2k5dmxwrqe" path="res://Assets/MainMenu/back2.png" id="3_nxhvi"]
+[ext_resource type="Texture2D" uid="uid://cc1fctnhhsors" path="res://Assets/MainMenu/back1.png" id="4_tp4sx"]
+[ext_resource type="Texture2D" uid="uid://comhj5moqfg0l" path="res://Assets/MainMenu/Button/vsmode2.png" id="5_3jctv"]
+[ext_resource type="Texture2D" uid="uid://cdicyamg0unff" path="res://Assets/MainMenu/Button/vsmode1.png" id="6_kld78"]
+[ext_resource type="Script" path="res://texture_button.gd" id="7_v540l"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c0pdg"]
+shader = ExtResource("2_t3ke4")
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_upa0c"]
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 1281.0
+offset_bottom = 715.0
+texture = ExtResource("4_tp4sx")
+
+[node name="Clouds" type="TextureRect" parent="."]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_c0pdg")
+layout_mode = 0
+offset_right = 1279.0
+offset_bottom = 340.0
+texture = ExtResource("3_nxhvi")
+
+[node name="Floor" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.499
+anchor_right = 0.5
+anchor_bottom = 0.499
+offset_left = -640.0
+offset_top = -359.28
+offset_right = 641.0
+offset_bottom = 359.72
+texture = ExtResource("2_xltru")
+
+[node name="TextureButton" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.581
+anchor_right = 0.5
+anchor_bottom = 0.581
+offset_left = -126.0
+offset_top = -35.32
+offset_right = 111.0
+offset_bottom = 34.68
+texture_normal = ExtResource("5_3jctv")
+texture_pressed = ExtResource("6_kld78")
+texture_hover = ExtResource("6_kld78")
+stretch_mode = 0
+script = ExtResource("7_v540l")
+normal_texture = ExtResource("5_3jctv")
+hover_texture = ExtResource("6_kld78")
+pressed_texture = ExtResource("6_kld78")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_upa0c")
+
+[connection signal="pressed" from="TextureButton" to="TextureButton" method="_on_pressed"]
