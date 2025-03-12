@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=3 uid="uid://cw3a5s017lyvh"]
+[gd_scene load_steps=67 format=3 uid="uid://cw3a5s017lyvh"]
 
 [ext_resource type="PackedScene" uid="uid://b7pomkmriwkpb" path="res://Scenes/player.tscn" id="1_f6ifx"]
 [ext_resource type="Texture2D" uid="uid://sdfvhqawjlt6" path="res://Assets/Ken/Idle/ken1.png" id="2_kq2cj"]
@@ -637,8 +637,11 @@ _data = {
 "walk_forward": SubResource("Animation_wvfop")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_35dud"]
-size = Vector2(58, 91)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_khxox"]
+size = Vector2(63, 92)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t5sar"]
+size = Vector2(60, 88)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eudpd"]
 size = Vector2(45, 23)
@@ -657,16 +660,23 @@ libraries = {
 "": SubResource("AnimationLibrary_wi6pp")
 }
 
-[node name="Hurtbox" parent="." index="2"]
+[node name="hurtbox" parent="Hurtbox" index="0"]
+position = Vector2(-0.5, 3)
+shape = SubResource("RectangleShape2D_khxox")
+
+[node name="Detect" parent="." index="3"]
 visible = false
-position = Vector2(2, -0.5)
-shape = SubResource("RectangleShape2D_35dud")
+position = Vector2(-2, 3)
+shape = SubResource("RectangleShape2D_t5sar")
+one_way_collision_margin = 0.0
 
 [node name="Hand" parent="Hitbox" index="0"]
 position = Vector2(38.5, -28.5)
 shape = SubResource("RectangleShape2D_eudpd")
+disabled = false
+one_way_collision = false
 
 [node name="Feet" parent="Hitbox" index="1"]
-visible = false
 position = Vector2(42.5, 28.75)
 shape = SubResource("RectangleShape2D_ekkv8")
+disabled = false
