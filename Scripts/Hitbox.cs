@@ -61,31 +61,36 @@ public partial class Hitbox : Area2D
         SetDeferred("collision_layer", GetCollisionLayer());
         SetDeferred("collision_mask", GetCollisionMask());
 
-        GD.Print($"✅ {PlayerName} Hitbox -> Layer: {GetCollisionLayer()}, Mask: {GetCollisionMask()}");
     }
 
     private void AssignPlayerName()
+{
+    Node playerNode = GetParent();
+    if (playerNode == null)
     {
-        Node playerNode = GetPlayerNode();
-        if (playerNode == null) return;
-
-        Global global = GetNode<Global>("/root/Global");
-
-        if (playerNode.SceneFilePath == global.Player1Character.ResourcePath)
-        {
-            PlayerName = "Player1";
-        }
-        else if (playerNode.SceneFilePath == global.Player2Character.ResourcePath)
-        {
-            PlayerName = "Player2";
-        }
-        else
-        {
-            GD.PrintErr("❌ Could not determine player identity in Hitbox!");
-        }
-
-        GD.Print($"✅ Assigned {PlayerName} to Hitbox on {playerNode.Name}");
+        GD.PrintErr("❌ Hitbox: Could not find Player node!");
+        return;
     }
+
+    // ✅ Get Player ID dynamically instead of using SceneFilePath
+    int playerID = playerNode.Get("PlayerID").AsInt32();
+
+    if (playerID == 1)
+    {
+        PlayerName = "Player1";
+    }
+    else if (playerID == 2)
+    {
+        PlayerName = "Player2";
+    }
+    else
+    {
+        GD.PrintErr("❌ Hitbox: Could not determine Player ID!");
+    }
+
+}
+
+
 
     private Node GetPlayerNode()
     {
@@ -116,8 +121,6 @@ public partial class Hitbox : Area2D
             return; // Prevent self-hit
         }
 
-        // Apply damage
-        hurtbox.Call("TakeDamage", Damage, PlayerName);
     }
 
     private Node GetPlayerNodeFromHurtbox(Area2D hurtbox)

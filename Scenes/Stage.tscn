@@ -1,9 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://1u77r3ofpf0a"]
+[gd_scene load_steps=5 format=3 uid="uid://1u77r3ofpf0a"]
 
 [ext_resource type="Script" path="res://Scripts/Stage.cs" id="1_u0uen"]
+[ext_resource type="PackedScene" uid="uid://dqbbpk2spliwu" path="res://Scenes/HUD.tscn" id="2_csun6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_22k5f"]
 size = Vector2(1154, 156)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_08br2"]
+size = Vector2(137, 543)
 
 [node name="Stage" type="Node2D"]
 script = ExtResource("1_u0uen")
@@ -22,3 +26,11 @@ collision_mask = 64
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(606, 634)
 shape = SubResource("RectangleShape2D_22k5f")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(1153.5, 306.5)
+shape = SubResource("RectangleShape2D_08br2")
+
+[node name="HUD" parent="." instance=ExtResource("2_csun6")]
+offset_top = 23.0
+offset_bottom = 743.0
