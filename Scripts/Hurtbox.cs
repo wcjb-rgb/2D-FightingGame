@@ -14,15 +14,10 @@ public partial class Hurtbox : Area2D
 
         playerScript = GetParent<Player>();
 
-        if (playerScript == null)
-        {
-            GD.PrintErr("❌ Hurtbox could not find Player.cs! Check node structure.");
-        }   
     }
 
     private void AssignCollisionLayers()
     {
-        // Clear any previous bits
         CollisionLayer = 0;
         CollisionMask  = 0;
 
@@ -32,22 +27,14 @@ public partial class Hurtbox : Area2D
         if (playerNode.SceneFilePath == global.Player1Character.ResourcePath)
         {
             PlayerName = "Player1";
-            // "Layer 2" => bit index 1 => decimal 2
             SetCollisionLayerValue(2, true);
-            // "Mask 3" => bit index 2 => decimal 4
             SetCollisionMaskValue(3, true);
         }
         else if (playerNode.SceneFilePath == global.Player2Character.ResourcePath)
         {
             PlayerName = "Player2";
-            // "Layer 4" => bit index 3 => decimal 8
             SetCollisionLayerValue(4, true);
-            // "Mask 1" => bit index 0 => decimal 1
             SetCollisionMaskValue(1, true);
-        }
-        else
-        {
-            GD.PrintErr("❌ Could not determine player identity in Hurtbox!");
         }
 
         SetDeferred("collision_layer", GetCollisionLayer());
@@ -60,11 +47,9 @@ public partial class Hurtbox : Area2D
     Node playerNode = GetParent();
     if (playerNode == null)
     {
-        GD.PrintErr("❌ Hurtbox: Could not find Player node!");
         return;
     }
 
-    // ✅ Get Player ID dynamically instead of using SceneFilePath
     int playerID = playerNode.Get("PlayerID").AsInt32();
 
     if (playerID == 1)
@@ -75,17 +60,10 @@ public partial class Hurtbox : Area2D
     {
         PlayerName = "Player2";
     }
-    else
-    {
-        GD.PrintErr("❌ Hurtbox: Could not determine Player ID!");
-    }
-
 }
-
 
     private Node GetPlayerNode()
     {
-        // Traverse up to find the Player node
         Node node = this;
         while (node != null && !(node is CharacterBody2D))
         {
@@ -96,7 +74,6 @@ public partial class Hurtbox : Area2D
 
     private void OnHitReceived(Area2D attackHitbox)
 {
-    // ✅ Check if the hitbox is enabled before processing the hit
     if (!attackHitbox.Monitoring)
     {
         GD.Print($"⚠️ Ignored attack: {attackHitbox.Name} is disabled.");
@@ -106,28 +83,14 @@ public partial class Hurtbox : Area2D
     GD.Print($"📡 Hitbox detected: {attackHitbox.Name} - Checking damage...");
 
     Node attacker = GetPlayerNodeFromHitbox(attackHitbox);
-    if (attacker == null)
-    {
-        GD.PrintErr("❌ Could not determine attacker Player node!");
-        return;
-    }
 
     Hitbox hb = attackHitbox as Hitbox;
-    if (hb == null)
-    {
-        GD.PrintErr("❌ Could not cast attack hitbox to Hitbox!");
-        return;
-    }
 
     int damage = hb.Damage;
     string attackerName = attacker.Get("PlayerName").AsString();
 
     GD.Print($"🔥 Player {PlayerName} detected attack from {attackerName}. Damage: {damage}");
 
-    if (damage == 0)
-    {
-        GD.PrintErr("⚠️ WARNING: Attack registered with 0 damage! Hitbox might be triggering early.");
-    }
 
     if (playerScript.IsBlocking() && playerScript.IsCrouching())
     {
@@ -150,7 +113,6 @@ public partial class Hurtbox : Area2D
 
     private Node GetPlayerNodeFromHitbox(Area2D hitbox)
     {
-        // Ensure we get the correct Player node
         Node node = hitbox;
         while (node != null && !(node is CharacterBody2D))
         {
