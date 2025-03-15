@@ -17,7 +17,7 @@ public partial class Hitbox : Area2D
             if (child is CollisionShape2D shape)
             {
                 hitboxShapes.Add(shape);
-                shape.Disabled = true; // Disable hitbox at start
+                shape.Disabled = true; 
             }
         }
         
@@ -26,38 +26,27 @@ public partial class Hitbox : Area2D
 
     private void AssignCollisionLayers()
     {
-        // First, clear out any bits so we start fresh
         CollisionLayer = 0;
         CollisionMask  = 0;
 
         Node playerNode = GetParent();
         Global global = GetNode<Global>("/root/Global");
 
-        // Decide which bits to enable based on Player1 or Player2
         if (playerNode.SceneFilePath == global.Player1Character.ResourcePath)
         {
             PlayerName = "Player1";
-            // "Layer 2" in the editor = bit index 1 => decimal 2
             SetCollisionLayerValue(1, true);
 
-            // "Mask 3" in the editor = bit index 2 => decimal 4
             SetCollisionMaskValue(4, true);
         }
         else if (playerNode.SceneFilePath == global.Player2Character.ResourcePath)
         {
             PlayerName = "Player2";
-            // "Layer 4" in the editor = bit index 3 => decimal 8
             SetCollisionLayerValue(3, true);
 
-            // "Mask 1" in the editor = bit index 0 => decimal 1
             SetCollisionMaskValue(2, true);
         }
-        else
-        {
-            GD.PrintErr("❌ Could not determine player identity in Hitbox!");
-        }
 
-        // Force Godot to apply changes before physics step
         SetDeferred("collision_layer", GetCollisionLayer());
         SetDeferred("collision_mask", GetCollisionMask());
 
@@ -68,11 +57,9 @@ public partial class Hitbox : Area2D
     Node playerNode = GetParent();
     if (playerNode == null)
     {
-        GD.PrintErr("❌ Hitbox: Could not find Player node!");
         return;
     }
 
-    // ✅ Get Player ID dynamically instead of using SceneFilePath
     int playerID = playerNode.Get("PlayerID").AsInt32();
 
     if (playerID == 1)
@@ -83,11 +70,6 @@ public partial class Hitbox : Area2D
     {
         PlayerName = "Player2";
     }
-    else
-    {
-        GD.PrintErr("❌ Hitbox: Could not determine Player ID!");
-    }
-
 }
 
 
@@ -107,18 +89,11 @@ public partial class Hitbox : Area2D
     {
         Node opponentPlayer = GetPlayerNodeFromHurtbox(hurtbox);
 
-        if (opponentPlayer == null)
-        {
-            GD.PrintErr("❌ Could not determine opponent Player node from Hurtbox!");
-            return;
-        }
-
         string opponentName = opponentPlayer.Get("PlayerName").AsString();
 
         if (opponentName == PlayerName)
         {
-            GD.Print($"🛑 Self-hit prevented: {PlayerName} hit their own hitbox.");
-            return; // Prevent self-hit
+            return; 
         }
 
     }

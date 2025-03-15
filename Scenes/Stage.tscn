@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://dqbbpk2spliwu" path="res://Scenes/HUD.tscn" id="2_csun6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_22k5f"]
-size = Vector2(1154, 156)
+size = Vector2(1345, 156)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_08br2"]
 size = Vector2(137, 543)
@@ -24,11 +24,15 @@ collision_layer = 128
 collision_mask = 64
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(606, 634)
+position = Vector2(575.5, 748)
 shape = SubResource("RectangleShape2D_22k5f")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(1153.5, 306.5)
+position = Vector2(1301, 396)
+shape = SubResource("RectangleShape2D_08br2")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-102, 400)
 shape = SubResource("RectangleShape2D_08br2")
 
 [node name="HUD" parent="." instance=ExtResource("2_csun6")]

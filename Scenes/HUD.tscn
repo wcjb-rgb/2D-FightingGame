@@ -16,6 +16,7 @@ offset_bottom = 108.0
 script = ExtResource("1_fgap4")
 
 [node name="Player1Healthbar" type="TextureProgressBar" parent="Healthbar"]
+layout_mode = 0
 offset_left = 632.0
 offset_top = 29.0
 offset_right = 1186.0
