@@ -1,13 +1,79 @@
-[gd_scene load_steps=5 format=3 uid="uid://1u77r3ofpf0a"]
+[gd_scene load_steps=16 format=3 uid="uid://1u77r3ofpf0a"]
 
 [ext_resource type="Script" path="res://Scripts/Stage.cs" id="1_u0uen"]
 [ext_resource type="PackedScene" uid="uid://dqbbpk2spliwu" path="res://Scenes/HUD.tscn" id="2_csun6"]
+[ext_resource type="Script" path="res://Scripts/CameraController.cs" id="3_ghfci"]
+[ext_resource type="Texture2D" uid="uid://ciefn6wk3o7vy" path="res://Assets/Stage/undefined-Imgur-ezgif.com-gif-to-sprite-converter.png" id="4_k5mcb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_22k5f"]
 size = Vector2(1345, 156)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_08br2"]
 size = Vector2(137, 543)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_grp7i"]
+atlas = ExtResource("4_k5mcb")
+region = Rect2(0, 0, 632, 315)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sywyr"]
+atlas = ExtResource("4_k5mcb")
+region = Rect2(632, 0, 632, 315)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_piov5"]
+atlas = ExtResource("4_k5mcb")
+region = Rect2(1264, 0, 632, 315)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dqlxj"]
+atlas = ExtResource("4_k5mcb")
+region = Rect2(1896, 0, 632, 315)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2n3em"]
+atlas = ExtResource("4_k5mcb")
+region = Rect2(0, 315, 632, 315)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t87ig"]
+atlas = ExtResource("4_k5mcb")
+region = Rect2(632, 315, 632, 315)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dyujk"]
+atlas = ExtResource("4_k5mcb")
+region = Rect2(1264, 315, 632, 315)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qutrd"]
+atlas = ExtResource("4_k5mcb")
+region = Rect2(1896, 315, 632, 315)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_638dm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_grp7i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sywyr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_piov5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dqlxj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2n3em")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t87ig")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dyujk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qutrd")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
 
 [node name="Stage" type="Node2D"]
 script = ExtResource("1_u0uen")
@@ -24,7 +90,8 @@ collision_layer = 128
 collision_mask = 64
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(575.5, 748)
+visible = false
+position = Vector2(604, 716)
 shape = SubResource("RectangleShape2D_22k5f")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
@@ -35,6 +102,20 @@ shape = SubResource("RectangleShape2D_08br2")
 position = Vector2(-102, 400)
 shape = SubResource("RectangleShape2D_08br2")
 
-[node name="HUD" parent="." instance=ExtResource("2_csun6")]
-offset_top = 23.0
-offset_bottom = 743.0
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(634, 451)
+zoom = Vector2(1.305, 1.305)
+script = ExtResource("3_ghfci")
+CameraSpeed = 2.0
+MinX = 492.0
+MaxX = 775.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HUD" parent="CanvasLayer" instance=ExtResource("2_csun6")]
+
+[node name="Background" type="AnimatedSprite2D" parent="."]
+position = Vector2(639.595, 354.781)
+scale = Vector2(2.02027, 2.26171)
+sprite_frames = SubResource("SpriteFrames_638dm")
+frame_progress = 0.132028

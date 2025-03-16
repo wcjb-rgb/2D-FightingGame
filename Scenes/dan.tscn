@@ -1,7 +1,7 @@
-[gd_scene load_steps=63 format=3 uid="uid://cflk1ixtmoob6"]
+[gd_scene load_steps=64 format=3 uid="uid://cflk1ixtmoob6"]
 
-[ext_resource type="Texture2D" uid="uid://bj0m3yidu1p6l" path="res://Assets/Dan/idle/dan0.png" id="1_p2hi0"]
 [ext_resource type="PackedScene" uid="uid://b7pomkmriwkpb" path="res://Scenes/player.tscn" id="1_yuq6b"]
+[ext_resource type="Texture2D" uid="uid://c77yqv0qtvnnp" path="res://Assets/CharSelect/dan.png" id="2_4sp85"]
 [ext_resource type="Texture2D" uid="uid://b7u3652ven81u" path="res://Assets/Dan/idle/dan1.png" id="2_s8dqa"]
 [ext_resource type="Texture2D" uid="uid://bilfwo8ypdo20" path="res://Assets/Dan/attack/hk1.png" id="2_x53oj"]
 [ext_resource type="Texture2D" uid="uid://nwtdlf1a8h3q" path="res://Assets/Dan/idle/dan2.png" id="3_4c200"]
@@ -48,6 +48,9 @@
 [ext_resource type="Texture2D" uid="uid://b24xmxk0a6m46" path="res://Assets/Dan/walk/walk4.png" id="46_i7ktu"]
 [ext_resource type="Texture2D" uid="uid://cjscl57ywpc35" path="res://Assets/Dan/walk/walk3.png" id="47_6lxfl"]
 [ext_resource type="Texture2D" uid="uid://bwonrqjasu31t" path="res://Assets/Dan/walk/walk2.png" id="48_6jhqo"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_mi86u"]
+load_path = "res://.godot/imported/dan0.png-3b68c53e9d090401023a6d32e5a7f889.ctex"
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_gg75o"]
 animations = [{
@@ -188,7 +191,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_p2hi0")
+"texture": SubResource("CompressedTexture2D_mi86u")
 }, {
 "duration": 1.0,
 "texture": ExtResource("2_s8dqa")
@@ -599,10 +602,11 @@ size = Vector2(35.25, 29.875)
 size = Vector2(33, 34)
 
 [node name="Dan" instance=ExtResource("1_yuq6b")]
+PortraitTexture = ExtResource("2_4sp85")
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_gg75o")
-animation = &"backward_jump"
+animation = &"HK"
 
 [node name="AnimationPlayer" parent="." index="1"]
 libraries = {
@@ -618,6 +622,9 @@ visible = false
 position = Vector2(-3.5, 0)
 shape = SubResource("RectangleShape2D_ot3lc")
 
+[node name="Hitbox" parent="." index="4"]
+visible = false
+
 [node name="Hand" parent="Hitbox" index="0"]
 position = Vector2(42, -39)
 shape = SubResource("RectangleShape2D_nv7n3")
@@ -625,7 +632,6 @@ disabled = false
 one_way_collision = false
 
 [node name="Feet" parent="Hitbox" index="1"]
-visible = false
 position = Vector2(40, -35)
 shape = SubResource("RectangleShape2D_mb504")
 disabled = false

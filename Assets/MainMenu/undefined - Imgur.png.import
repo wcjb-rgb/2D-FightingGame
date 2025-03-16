@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://crnt40nsm0ckl"
-path="res://.godot/imported/Neo Geo NGCD - Art of Fighting - China Town.png-5a3d722aefa6b96231ee3a87d9e7a45a.ctex"
+uid="uid://dr51ss5alkkw5"
+path="res://.godot/imported/undefined - Imgur.png-a9f4dce3455ba45f6853d8898c83ab8c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Stage/Neo Geo NGCD - Art of Fighting - China Town.png"
-dest_files=["res://.godot/imported/Neo Geo NGCD - Art of Fighting - China Town.png-5a3d722aefa6b96231ee3a87d9e7a45a.ctex"]
+source_file="res://Assets/MainMenu/undefined - Imgur.png"
+dest_files=["res://.godot/imported/undefined - Imgur.png-a9f4dce3455ba45f6853d8898c83ab8c.ctex"]
 
 [params]
 

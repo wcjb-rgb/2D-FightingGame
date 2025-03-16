@@ -3,11 +3,12 @@ using System;
 
 public partial class Player : CharacterBody2D
 {
-    [Export] public float Speed = 200f;
-    [Export] public float JumpForce = -600f;
-    [Export] public float Gravity = 980f;
+    [Export] public float Speed = 300f;
+    [Export] public float JumpForce = -1000f;
+    [Export] public float Gravity = 1600f;
     [Export] public int PlayerID = 1;
     [Export] public int MaxHealth = 100;
+    [Export] public Texture2D PortraitTexture;
     private int currentHealth;
     private bool canMove = true; 
     public string PlayerName;
@@ -151,6 +152,7 @@ public partial class Player : CharacterBody2D
     }
 
     float direction = Input.GetActionStrength(moveRight) - Input.GetActionStrength(moveLeft);
+
     Velocity = new Vector2(direction * Speed, Velocity.Y);
 
     if (direction != 0)
@@ -280,5 +282,10 @@ public partial class Player : CharacterBody2D
         Velocity = Vector2.Zero;
         _anim.Play(attackType);
         _attackCooldown.Start(0.4f);
+    }
+
+    public Texture2D GetPortrait()
+    {
+        return PortraitTexture;
     }
 }

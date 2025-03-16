@@ -72,11 +72,8 @@ public partial class Hitbox : Area2D
     }
 }
 
-
-
     private Node GetPlayerNode()
     {
-        // Traverse up to find the Player node
         Node node = this;
         while (node != null && !(node is CharacterBody2D))
         {
@@ -97,10 +94,8 @@ public partial class Hitbox : Area2D
         }
 
     }
-
     private Node GetPlayerNodeFromHurtbox(Area2D hurtbox)
     {
-        // Ensure we get the correct Player node
         Node node = hurtbox;
         while (node != null && !(node is CharacterBody2D))
         {

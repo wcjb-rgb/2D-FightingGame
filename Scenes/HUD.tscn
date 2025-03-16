@@ -1,26 +1,44 @@
-[gd_scene load_steps=3 format=3 uid="uid://dqbbpk2spliwu"]
+[gd_scene load_steps=15 format=3 uid="uid://dqbbpk2spliwu"]
 
+[ext_resource type="Script" path="res://Scripts/HUD.cs" id="1_5ihc3"]
 [ext_resource type="Script" path="res://Scripts/HealthBarManager.cs" id="1_fgap4"]
 [ext_resource type="Texture2D" uid="uid://cv0cchvoeymj6" path="res://Assets/HUD-Elements/whitesquare.png" id="2_cqajn"]
+[ext_resource type="Texture2D" uid="uid://dcw2k7t8v1wri" path="res://Assets/HUD-Elements/Numbers/n0.png" id="2_evh63"]
+[ext_resource type="Texture2D" uid="uid://cgv8hwgbgmws6" path="res://Assets/HUD-Elements/KO-Bar.png" id="3_q3ywd"]
+[ext_resource type="Texture2D" uid="uid://by2k61fsscytv" path="res://Assets/HUD-Elements/Numbers/n1.png" id="3_v8c6p"]
+[ext_resource type="Texture2D" uid="uid://cp5v6i4d71wjr" path="res://Assets/HUD-Elements/Numbers/n2.png" id="4_v5o3k"]
+[ext_resource type="Texture2D" uid="uid://b45apjh663vwl" path="res://Assets/HUD-Elements/Numbers/n9.png" id="4_xpcpi"]
+[ext_resource type="Texture2D" uid="uid://dbahebrnlfxdd" path="res://Assets/HUD-Elements/Numbers/n3.png" id="5_coqye"]
+[ext_resource type="Texture2D" uid="uid://dj7lrjbdcqhe0" path="res://Assets/HUD-Elements/Numbers/n4.png" id="6_24ocv"]
+[ext_resource type="Texture2D" uid="uid://n6sxm71wfrmv" path="res://Assets/HUD-Elements/Numbers/n5.png" id="7_qycyy"]
+[ext_resource type="Texture2D" uid="uid://dwu7f0fy7tl3q" path="res://Assets/HUD-Elements/Numbers/n6.png" id="8_msvlg"]
+[ext_resource type="Texture2D" uid="uid://dbhigdj0o10tx" path="res://Assets/HUD-Elements/Numbers/n7.png" id="9_nli7a"]
+[ext_resource type="Texture2D" uid="uid://beqj2eo5s4xrv" path="res://Assets/HUD-Elements/Numbers/n8.png" id="10_2shyu"]
 
 [node name="HUD" type="Control"]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 1280.0
-offset_bottom = 720.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -640.0
+offset_right = -640.0
+grow_horizontal = 2
+script = ExtResource("1_5ihc3")
+timeSprites = Array[Texture]([ExtResource("2_evh63"), ExtResource("3_v8c6p"), ExtResource("4_v5o3k"), ExtResource("5_coqye"), ExtResource("6_24ocv"), ExtResource("7_qycyy"), ExtResource("8_msvlg"), ExtResource("9_nli7a"), ExtResource("10_2shyu"), ExtResource("4_xpcpi")])
 
 [node name="Healthbar" type="Control" parent="."]
+layout_mode = 3
 anchors_preset = 0
-offset_right = 1276.0
+offset_right = 1280.0
 offset_bottom = 108.0
 script = ExtResource("1_fgap4")
 
 [node name="Player1Healthbar" type="TextureProgressBar" parent="Healthbar"]
 layout_mode = 0
-offset_left = 632.0
-offset_top = 29.0
-offset_right = 1186.0
-offset_bottom = 92.0
+offset_left = 687.0
+offset_top = 38.0
+offset_right = 1195.0
+offset_bottom = 84.0
 value = 1.0
 fill_mode = 1
 nine_patch_stretch = true
@@ -31,13 +49,62 @@ tint_progress = Color(1, 1, 0, 1)
 
 [node name="Player2Healthbar" type="TextureProgressBar" parent="Healthbar"]
 layout_mode = 0
-offset_left = 51.0
-offset_top = 29.0
-offset_right = 605.0
-offset_bottom = 92.0
+offset_left = 85.0
+offset_top = 38.0
+offset_right = 602.0
+offset_bottom = 84.0
 value = 1.0
 nine_patch_stretch = true
 texture_under = ExtResource("2_cqajn")
 texture_progress = ExtResource("2_cqajn")
 tint_under = Color(1, 0, 0, 1)
 tint_progress = Color(1, 1, 0, 1)
+
+[node name="TextureRect" type="TextureRect" parent="Healthbar"]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 22.0
+offset_right = 1222.0
+offset_bottom = 97.0
+scale = Vector2(0.981119, 1.05011)
+texture = ExtResource("3_q3ywd")
+
+[node name="Player1Portrait" type="TextureRect" parent="Healthbar"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 29.0
+offset_right = 74.0
+offset_bottom = 90.0
+
+[node name="Player2Portrait" type="TextureRect" parent="Healthbar"]
+layout_mode = 0
+offset_left = 1209.0
+offset_top = 29.0
+offset_right = 1274.0
+offset_bottom = 90.0
+
+[node name="Time" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 595.0
+offset_top = 26.0
+offset_right = 635.0
+offset_bottom = 66.0
+
+[node name="Ones" type="TextureRect" parent="Time"]
+layout_mode = 0
+offset_left = 53.0
+offset_top = 83.0
+offset_right = 96.0
+offset_bottom = 136.0
+texture = ExtResource("4_xpcpi")
+
+[node name="Tens" type="TextureRect" parent="Time"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 83.0
+offset_right = 47.0
+offset_bottom = 136.0
+texture = ExtResource("4_xpcpi")
+
+[node name="Timer" type="Timer" parent="Time"]
+autostart = true

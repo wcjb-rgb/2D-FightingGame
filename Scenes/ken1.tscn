@@ -1,4 +1,4 @@
-[gd_scene load_steps=82 format=3 uid="uid://cw3a5s017lyvh"]
+[gd_scene load_steps=83 format=3 uid="uid://cw3a5s017lyvh"]
 
 [ext_resource type="PackedScene" uid="uid://b7pomkmriwkpb" path="res://Scenes/player.tscn" id="1_f6ifx"]
 [ext_resource type="Texture2D" uid="uid://sdfvhqawjlt6" path="res://Assets/Ken/Idle/ken1.png" id="2_kq2cj"]
@@ -61,6 +61,7 @@
 [ext_resource type="Texture2D" uid="uid://bbqmc7gtbeyrr" path="res://Assets/Ken/Jump/jumpn3.png" id="36_5xtw0"]
 [ext_resource type="Texture2D" uid="uid://b86hcv1xqlgbd" path="res://Assets/Ken/hit/hit3.png" id="37_cv85u"]
 [ext_resource type="Texture2D" uid="uid://bchva2evcfgad" path="res://Assets/Ken/hit/hit4.png" id="38_yg4m7"]
+[ext_resource type="Texture2D" uid="uid://k6lma2x1n1kq" path="res://Assets/CharSelect/ken.png" id="62_v504n"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_1sgwm"]
 animations = [{
@@ -902,6 +903,7 @@ size = Vector2(45, 23)
 size = Vector2(29, 32.5)
 
 [node name="Ken" instance=ExtResource("1_f6ifx")]
+PortraitTexture = ExtResource("62_v504n")
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_1sgwm")

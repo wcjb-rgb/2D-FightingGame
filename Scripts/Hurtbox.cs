@@ -76,11 +76,11 @@ public partial class Hurtbox : Area2D
 {
     if (!attackHitbox.Monitoring)
     {
-        GD.Print($"⚠️ Ignored attack: {attackHitbox.Name} is disabled.");
+        GD.Print($"Ignored attack: {attackHitbox.Name} is disabled.");
         return;
     }
 
-    GD.Print($"📡 Hitbox detected: {attackHitbox.Name} - Checking damage...");
+    GD.Print($"Hitbox detected: {attackHitbox.Name} - Checking damage...");
 
     Node attacker = GetPlayerNodeFromHitbox(attackHitbox);
 
@@ -89,22 +89,22 @@ public partial class Hurtbox : Area2D
     int damage = hb.Damage;
     string attackerName = attacker.Get("PlayerName").AsString();
 
-    GD.Print($"🔥 Player {PlayerName} detected attack from {attackerName}. Damage: {damage}");
+    GD.Print($"Player {PlayerName} detected attack from {attackerName}. Damage: {damage}");
 
 
     if (playerScript.IsBlocking() && playerScript.IsCrouching())
     {
-        GD.Print($"🛡️ {PlayerName} crouch blocked an attack from {attackerName}!");
+        GD.Print($"{PlayerName} crouch blocked an attack from {attackerName}!");
         playerScript.PlayCrouchBlockReaction();
     }
     else if (playerScript.IsBlocking())
     {
-        GD.Print($"🛡️ {PlayerName} blocked an attack from {attackerName}!");
+        GD.Print($"{PlayerName} blocked an attack from {attackerName}!");
         playerScript.PlayBlockReaction();
     }
     else
     {
-        GD.Print($"🔥 {PlayerName} took {damage} damage from {attackerName}.");
+        GD.Print($"{PlayerName} took {damage} damage from {attackerName}.");
         playerScript.PlayHitReaction();
         playerScript.TakeDamage(damage);
     }
@@ -124,11 +124,11 @@ public partial class Hurtbox : Area2D
     public void TakeDamage(int damage, string attackerName)
     {
         Health -= damage;
-        GD.Print($"🔥 {PlayerName} took {damage} damage from {attackerName}. Remaining HP: {Health}");
+        GD.Print($"{PlayerName} took {damage} damage from {attackerName}. Remaining HP: {Health}");
 
         if (Health <= 0)
         {
-            GD.Print($"💀 {PlayerName} is KO!");
+            GD.Print($"{PlayerName} is KO!");
         }
     }
 }

@@ -7,7 +7,6 @@ public partial class Global : Node
 
     public override void _Ready()
     {
-        // Keep this node persistent across scene changes
         SetProcess(false);
     }
 }
