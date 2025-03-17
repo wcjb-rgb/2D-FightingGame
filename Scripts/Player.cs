@@ -3,7 +3,7 @@ using System;
 
 public partial class Player : CharacterBody2D
 {
-    [Export] public float Speed = 300f;
+    [Export] public float Speed = 350f;
     [Export] public float JumpForce = -1000f;
     [Export] public float Gravity = 1600f;
     [Export] public int PlayerID = 1;
@@ -200,7 +200,7 @@ public partial class Player : CharacterBody2D
             _anim.Play("crouch_block");
         }
 
-        DisableMovement(0.2f); 
+        DisableMovement(0.1f); 
     }
 
     public void PlayHitReaction()
@@ -209,7 +209,7 @@ public partial class Player : CharacterBody2D
 
         _anim.Play("hit");
 
-        DisableMovement(0.5f); 
+        DisableMovement(0.3f); 
     }
 
     public void TakeDamage(int damage)

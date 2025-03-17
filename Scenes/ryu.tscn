@@ -1,0 +1,1155 @@
+[gd_scene load_steps=89 format=3 uid="uid://cm04ca8foh07f"]
+
+[ext_resource type="PackedScene" uid="uid://b7pomkmriwkpb" path="res://Scenes/player.tscn" id="1_hxmb6"]
+[ext_resource type="Texture2D" uid="uid://ky4ax25blw30" path="res://Assets/Ryu/attack/HK0.png" id="2_6gxyg"]
+[ext_resource type="Texture2D" uid="uid://cisaq8dxh0wwq" path="res://Assets/Ryu/attack/HK1.png" id="3_m1auv"]
+[ext_resource type="Texture2D" uid="uid://dhaj36ao3j3rx" path="res://Assets/Ryu/attack/HK2.png" id="4_rgjrm"]
+[ext_resource type="Texture2D" uid="uid://qn7rehupyvev" path="res://Assets/Ryu/attack/HK3.png" id="5_8c3ry"]
+[ext_resource type="Texture2D" uid="uid://3pws7mmrd6n3" path="res://Assets/Ryu/attack/HP0.png" id="6_7n2h4"]
+[ext_resource type="Texture2D" uid="uid://c6ughrkuqi0eb" path="res://Assets/Ryu/attack/HP1.png" id="7_25f5i"]
+[ext_resource type="Texture2D" uid="uid://b4aceyp5nlaxs" path="res://Assets/Ryu/attack/HP2.png" id="8_axaf4"]
+[ext_resource type="Texture2D" uid="uid://cmulj4dbm7ajp" path="res://Assets/Ryu/attack/HP3.png" id="9_gm7go"]
+[ext_resource type="Texture2D" uid="uid://cuh8fqhv7shm0" path="res://Assets/Ryu/attack/HP4.png" id="10_fmiex"]
+[ext_resource type="Texture2D" uid="uid://bs5n0h1ghni5i" path="res://Assets/Ryu/attack/LK0.png" id="11_dlnag"]
+[ext_resource type="Texture2D" uid="uid://dwa4kudnfusmu" path="res://Assets/Ryu/attack/LK1.png" id="12_kb5d5"]
+[ext_resource type="Texture2D" uid="uid://dlmwbqt50uhaw" path="res://Assets/Ryu/attack/LK2.png" id="13_mkmld"]
+[ext_resource type="Texture2D" uid="uid://bplwwtsnrk35e" path="res://Assets/Ryu/attack/LK3.png" id="14_n88th"]
+[ext_resource type="Texture2D" uid="uid://kqw7xf8tvkfc" path="res://Assets/Ryu/attack/LK4.png" id="15_8657m"]
+[ext_resource type="Texture2D" uid="uid://0hb7yqf0t8w4" path="res://Assets/Ryu/attack/LK5.png" id="16_e1ei6"]
+[ext_resource type="Texture2D" uid="uid://dks51hc1paxdj" path="res://Assets/Ryu/attack/LP0.png" id="17_a2hqb"]
+[ext_resource type="Texture2D" uid="uid://dsbarfj1hgqj" path="res://Assets/Ryu/attack/LP1.png" id="18_7utvc"]
+[ext_resource type="Texture2D" uid="uid://d0den8cegssbf" path="res://Assets/Ryu/attack/LP2.png" id="19_5gdcf"]
+[ext_resource type="Texture2D" uid="uid://y06c5n0ojr18" path="res://Assets/Ryu/block/standb0.png" id="20_t7gap"]
+[ext_resource type="Texture2D" uid="uid://o4vgw2c3bosf" path="res://Assets/Ryu/block/standb1.png" id="21_do72o"]
+[ext_resource type="Texture2D" uid="uid://b13qsha6mpdjh" path="res://Assets/Ryu/block/standb2.png" id="22_qrfch"]
+[ext_resource type="Texture2D" uid="uid://b57l7h7ww2lo4" path="res://Assets/Ryu/crouch/0.png" id="23_drcaj"]
+[ext_resource type="Texture2D" uid="uid://dp73emsh0yxmg" path="res://Assets/Ryu/crouch/Arcade - Street Fighter Alpha Zero - Ryu-1-0.png" id="24_sjyqn"]
+[ext_resource type="Texture2D" uid="uid://c7nvpp8xt2c3t" path="res://Assets/Ryu/crouch/Arcade - Street Fighter Alpha Zero - Ryu-2-0.png" id="25_0wgnx"]
+[ext_resource type="Texture2D" uid="uid://dp4tww8lwuekb" path="res://Assets/Ryu/hit/c0.png" id="26_6tjg5"]
+[ext_resource type="Texture2D" uid="uid://b6f0q24kl71vj" path="res://Assets/Ryu/block/crouchb0.png" id="26_sl5tx"]
+[ext_resource type="Texture2D" uid="uid://b1kk3cy3feu1b" path="res://Assets/Ryu/block/crouchb1.png" id="27_1y1on"]
+[ext_resource type="Texture2D" uid="uid://c41j55qfo0wts" path="res://Assets/Ryu/hit/c1.png" id="27_78tla"]
+[ext_resource type="Texture2D" uid="uid://b5janr43x113r" path="res://Assets/Ryu/hit/c2.png" id="28_0ldw0"]
+[ext_resource type="Texture2D" uid="uid://yc7a56cnibx8" path="res://Assets/Ryu/block/crouchb2.png" id="28_2yf0o"]
+[ext_resource type="Texture2D" uid="uid://3ru0yn5xigmk" path="res://Assets/Ryu/hit/0.png" id="29_45b42"]
+[ext_resource type="Texture2D" uid="uid://df4fofu83mnue" path="res://Assets/Ryu/idle/0.png" id="29_bdkhw"]
+[ext_resource type="Texture2D" uid="uid://b2wrp5byejc87" path="res://Assets/Ryu/hit/1.png" id="30_brusu"]
+[ext_resource type="Texture2D" uid="uid://480a622ej3g0" path="res://Assets/Ryu/idle/1.png" id="30_gnusp"]
+[ext_resource type="Texture2D" uid="uid://bmjyyj1llfn0m" path="res://Assets/Ryu/idle/3.png" id="31_0qlrv"]
+[ext_resource type="Texture2D" uid="uid://bw1npwqrqxt1" path="res://Assets/Ryu/hit/2.png" id="31_gdbpg"]
+[ext_resource type="Texture2D" uid="uid://cot6dilu1v6cr" path="res://Assets/Ryu/idle/4.png" id="32_os4tb"]
+[ext_resource type="Texture2D" uid="uid://d0c8gwnjdh16f" path="res://Assets/Ryu/idle/5.png" id="33_tnrdg"]
+[ext_resource type="Texture2D" uid="uid://ckjsmopdf8vjr" path="res://Assets/Ryu/idle/6.png" id="34_chtl2"]
+[ext_resource type="Texture2D" uid="uid://bj4xncqr5h1xv" path="res://Assets/Ryu/walk_forward/Arcade - Street Fighter Alpha Zero - Ryu-05-00.png" id="35_rvb5k"]
+[ext_resource type="Texture2D" uid="uid://x3gy2kn3jcpi" path="res://Assets/Ryu/walk_forward/Arcade - Street Fighter Alpha Zero - Ryu-06-00.png" id="36_86y5e"]
+[ext_resource type="Texture2D" uid="uid://mbpbt4yruf7x" path="res://Assets/Ryu/walk_forward/Arcade - Street Fighter Alpha Zero - Ryu-07-00.png" id="37_h7xxa"]
+[ext_resource type="Texture2D" uid="uid://bucc4bqmnm42h" path="res://Assets/Ryu/walk_forward/Arcade - Street Fighter Alpha Zero - Ryu-08-00.png" id="38_8fvgc"]
+[ext_resource type="Texture2D" uid="uid://c5rvp4te7ed0a" path="res://Assets/Ryu/walk_forward/Arcade - Street Fighter Alpha Zero - Ryu-09-00.png" id="39_iau6w"]
+[ext_resource type="Texture2D" uid="uid://dcnhui50gql8x" path="res://Assets/Ryu/walk_forward/Arcade - Street Fighter Alpha Zero - Ryu-00-00.png" id="40_h84fg"]
+[ext_resource type="Texture2D" uid="uid://dmahe4jvsek6o" path="res://Assets/Ryu/jump/Arcade - Street Fighter Alpha Zero - Ryu-0-0.png" id="41_aermf"]
+[ext_resource type="Texture2D" uid="uid://cc12ejjb1puyl" path="res://Assets/Ryu/walk_forward/Arcade - Street Fighter Alpha Zero - Ryu-01-00.png" id="41_h5i7b"]
+[ext_resource type="Texture2D" uid="uid://cfwqolc1glrwj" path="res://Assets/Ryu/walk_forward/Arcade - Street Fighter Alpha Zero - Ryu-02-00.png" id="42_bepa2"]
+[ext_resource type="Texture2D" uid="uid://d4ipkta62a8ud" path="res://Assets/Ryu/jump/Arcade - Street Fighter Alpha Zero - Ryu-1-0.png" id="42_fv4sp"]
+[ext_resource type="Texture2D" uid="uid://di8rjoxdcbg86" path="res://Assets/Ryu/walk_forward/Arcade - Street Fighter Alpha Zero - Ryu-03-00.png" id="43_rex7u"]
+[ext_resource type="Texture2D" uid="uid://ki74c43xgw8c" path="res://Assets/Ryu/jump/Arcade - Street Fighter Alpha Zero - Ryu-2-0.png" id="43_t4hkb"]
+[ext_resource type="Texture2D" uid="uid://c4tsa3ams8bk3" path="res://Assets/Ryu/walk_forward/Arcade - Street Fighter Alpha Zero - Ryu-04-00.png" id="44_12k6f"]
+[ext_resource type="Texture2D" uid="uid://dkyhwh1an8sk8" path="res://Assets/Ryu/jump/Arcade - Street Fighter Alpha Zero - Ryu-3-0.png" id="44_e0iot"]
+[ext_resource type="Texture2D" uid="uid://26jtip2d3nke" path="res://Assets/Ryu/jump/Arcade - Street Fighter Alpha Zero - Ryu-4-0.png" id="45_kuro3"]
+[ext_resource type="Texture2D" uid="uid://bnt45r57elb7u" path="res://Assets/Ryu/jump/Arcade - Street Fighter Alpha Zero - Ryu-5-0.png" id="46_sb5il"]
+[ext_resource type="Texture2D" uid="uid://dbbqqwkdegkrm" path="res://Assets/Ryu/jump/Arcade - Street Fighter Alpha Zero - Ryu-7-0.png" id="47_5gx32"]
+[ext_resource type="Texture2D" uid="uid://ceid2685b3wdr" path="res://Assets/Ryu/jumpf/Arcade - Street Fighter Alpha Zero - Ryu-00-00.png" id="48_wh8vh"]
+[ext_resource type="Texture2D" uid="uid://clveby0s0wh03" path="res://Assets/Ryu/jumpf/Arcade - Street Fighter Alpha Zero - Ryu-01-00.png" id="49_a6s0u"]
+[ext_resource type="Texture2D" uid="uid://c73u30hf1w3hy" path="res://Assets/Ryu/jumpf/Arcade - Street Fighter Alpha Zero - Ryu-02-00.png" id="50_p0fih"]
+[ext_resource type="Texture2D" uid="uid://dhv7pi4wsghl" path="res://Assets/Ryu/jumpf/Arcade - Street Fighter Alpha Zero - Ryu-03-00.png" id="51_trn7a"]
+[ext_resource type="Texture2D" uid="uid://bfshni8cjlmgo" path="res://Assets/Ryu/jumpf/Arcade - Street Fighter Alpha Zero - Ryu-04-00.png" id="52_887en"]
+[ext_resource type="Texture2D" uid="uid://bhc50iefwisff" path="res://Assets/Ryu/jumpf/Arcade - Street Fighter Alpha Zero - Ryu-05-00.png" id="53_b1eay"]
+[ext_resource type="Texture2D" uid="uid://cbrngdcgljbkq" path="res://Assets/Ryu/jumpf/Arcade - Street Fighter Alpha Zero - Ryu-06-00.png" id="54_oji8t"]
+[ext_resource type="Texture2D" uid="uid://cfja8m0h4mfrm" path="res://Assets/Ryu/jumpf/Arcade - Street Fighter Alpha Zero - Ryu-07-00.png" id="55_nee3y"]
+[ext_resource type="Texture2D" uid="uid://dvgsckxq431vh" path="res://Assets/Ryu/jumpf/Arcade - Street Fighter Alpha Zero - Ryu-08-00.png" id="56_3jv5p"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_apkxy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_6gxyg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_m1auv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_rgjrm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_m1auv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_8c3ry")
+}],
+"loop": true,
+"name": &"HK",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_7n2h4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_25f5i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_axaf4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_gm7go")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_fmiex")
+}],
+"loop": true,
+"name": &"HP",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_dlnag")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_kb5d5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_mkmld")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_n88th")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_8657m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_e1ei6")
+}],
+"loop": true,
+"name": &"LK",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("17_a2hqb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_7utvc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_5gdcf")
+}],
+"loop": true,
+"name": &"LP",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("56_3jv5p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("55_nee3y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("54_oji8t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("53_b1eay")
+}, {
+"duration": 1.0,
+"texture": ExtResource("52_887en")
+}, {
+"duration": 1.0,
+"texture": ExtResource("51_trn7a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("50_p0fih")
+}, {
+"duration": 1.0,
+"texture": ExtResource("48_wh8vh")
+}],
+"loop": true,
+"name": &"backjump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("20_t7gap")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_do72o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_qrfch")
+}],
+"loop": true,
+"name": &"block",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("23_drcaj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_sjyqn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_0wgnx")
+}],
+"loop": true,
+"name": &"crouch",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("26_6tjg5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_78tla")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_0ldw0")
+}],
+"loop": true,
+"name": &"crouch_hit",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("26_sl5tx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_1y1on")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_2yf0o")
+}],
+"loop": true,
+"name": &"crouchblock",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("29_45b42")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_brusu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_gdbpg")
+}],
+"loop": true,
+"name": &"hit",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("29_bdkhw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_gnusp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_0qlrv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_os4tb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_tnrdg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("34_chtl2")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("41_aermf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("42_fv4sp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("43_t4hkb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("44_e0iot")
+}, {
+"duration": 1.0,
+"texture": ExtResource("45_kuro3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("46_sb5il")
+}, {
+"duration": 1.0,
+"texture": ExtResource("47_5gx32")
+}],
+"loop": false,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("48_wh8vh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("49_a6s0u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("50_p0fih")
+}, {
+"duration": 1.0,
+"texture": ExtResource("51_trn7a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("52_887en")
+}, {
+"duration": 1.0,
+"texture": ExtResource("53_b1eay")
+}, {
+"duration": 1.0,
+"texture": ExtResource("54_oji8t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("55_nee3y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("56_3jv5p")
+}],
+"loop": true,
+"name": &"jump_forward",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("35_rvb5k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("36_86y5e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("37_h7xxa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("38_8fvgc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("39_iau6w")
+}],
+"loop": true,
+"name": &"walk_backward",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("40_h84fg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("41_h5i7b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("42_bepa2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("43_rex7u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("44_12k6f")
+}],
+"loop": true,
+"name": &"walk_forward",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_oe5mv"]
+resource_name = "idle"
+length = 0.500003
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"idle"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Hurtbox/hurtbox:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1.13636, 0.681819), Vector2(1.13636, 0.681819)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../Hitbox/Hand:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../Hitbox/Feet:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("../Hurtbox/hurtbox:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1.005, 0.785), Vector2(1.005, 0.785)]
+}
+
+[sub_resource type="Animation" id="Animation_aucbu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Hitbox/Hand:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(43.1818, -29.7727)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Hitbox/Hand:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../Hurtbox/hurtbox:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1.13636, 11.1364)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../Hitbox/Feet:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("../Hitbox/Feet:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(48.5227, -29.7727)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("../Hurtbox/hurtbox:scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1.005, 0.785)]
+}
+
+[sub_resource type="Animation" id="Animation_50gvs"]
+resource_name = "HP"
+length = 0.66667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"HP"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.333333, 0.5, 0.666667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Hitbox/Hand:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.333333, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../Hitbox/Hand:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(31.8182, -27.2727), Vector2(43.1818, -29.7727)]
+}
+
+[sub_resource type="Animation" id="Animation_j23ys"]
+resource_name = "LP"
+length = 0.26667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"LP"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.266667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Hitbox/Hand:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.266667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+
+[sub_resource type="Animation" id="Animation_cw0nt"]
+resource_name = "walk_forward"
+length = 0.400003
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"walk_forward"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+
+[sub_resource type="Animation" id="Animation_k1r3r"]
+resource_name = "walk_backward"
+length = 0.66667
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"walk_backward"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.333333, 0.5, 0.666667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+
+[sub_resource type="Animation" id="Animation_yexxu"]
+resource_name = "block"
+length = 0.333337
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"block"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.333333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
+[sub_resource type="Animation" id="Animation_nfx1n"]
+resource_name = "crouch"
+length = 0.300003
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"crouch"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Hurtbox/hurtbox:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(3.03153, 12.1506)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../Hurtbox/hurtbox:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1.005, 0.55)]
+}
+
+[sub_resource type="Animation" id="Animation_42ew4"]
+resource_name = "LK"
+length = 0.66667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"LK"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Hurtbox/hurtbox:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(3.10852, 0.90909)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.266667, 0.4, 0.533333, 0.666667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../Hitbox/Feet:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(46.3636, 29.5455)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../Hitbox/Feet:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+
+[sub_resource type="Animation" id="Animation_7m6oq"]
+resource_name = "HK"
+length = 0.533337
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"HK"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.266667, 0.4, 0.533333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Hitbox/Feet:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../Hitbox/Feet:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(46.3636, 29.5455), Vector2(48.5227, -29.7727)]
+}
+
+[sub_resource type="Animation" id="Animation_61s7e"]
+resource_name = "crouch_block"
+length = 0.300003
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"crouchblock"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.266667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Hurtbox/hurtbox:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-0.909091, -0.909091)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../Hurtbox/hurtbox:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1.005, 0.55)]
+}
+
+[sub_resource type="Animation" id="Animation_x3iwm"]
+resource_name = "hit"
+length = 0.200003
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"hit"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
+[sub_resource type="Animation" id="Animation_m55gh"]
+resource_name = "crouch_hit"
+length = 0.333337
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"crouch_hit"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Hurtbox/hurtbox:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-0.909091, -0.909091)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../Hurtbox/hurtbox:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1.005, 0.55)]
+}
+
+[sub_resource type="Animation" id="Animation_k8gvw"]
+resource_name = "jump"
+length = 0.733337
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"jump"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.233333, 0.333333, 0.466667, 0.566667, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6]
+}
+
+[sub_resource type="Animation" id="Animation_qdi2p"]
+resource_name = "forward_jump"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"jump_forward"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.233333, 0.333333, 0.466667, 0.6, 0.766667, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+}
+
+[sub_resource type="Animation" id="Animation_a1wqn"]
+resource_name = "backward_jump"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"backjump"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.266667, 0.4, 0.566667, 0.7, 0.866667, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1kde2"]
+_data = {
+"HK": SubResource("Animation_7m6oq"),
+"HP": SubResource("Animation_50gvs"),
+"LK": SubResource("Animation_42ew4"),
+"LP": SubResource("Animation_j23ys"),
+"RESET": SubResource("Animation_aucbu"),
+"backward_jump": SubResource("Animation_a1wqn"),
+"block": SubResource("Animation_yexxu"),
+"crouch": SubResource("Animation_nfx1n"),
+"crouch_block": SubResource("Animation_61s7e"),
+"crouch_hit": SubResource("Animation_m55gh"),
+"forward_jump": SubResource("Animation_qdi2p"),
+"hit": SubResource("Animation_x3iwm"),
+"idle": SubResource("Animation_oe5mv"),
+"jump": SubResource("Animation_k8gvw"),
+"walk_backward": SubResource("Animation_k1r3r"),
+"walk_forward": SubResource("Animation_cw0nt")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7thjg"]
+size = Vector2(66.4858, 122.177)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dlfye"]
+size = Vector2(55.9091, 75.9091)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_grnvg"]
+size = Vector2(55, 29.3182)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r34l3"]
+size = Vector2(49.3182, 44.0909)
+
+[node name="Ryu" instance=ExtResource("1_hxmb6")]
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_apkxy")
+animation = &"hit"
+frame = 1
+
+[node name="AnimationPlayer" parent="." index="1"]
+libraries = {
+"": SubResource("AnimationLibrary_1kde2")
+}
+
+[node name="hurtbox" parent="Hurtbox" index="0"]
+position = Vector2(1.13636, 11.1364)
+scale = Vector2(1.005, 0.785)
+shape = SubResource("RectangleShape2D_7thjg")
+
+[node name="Detect" parent="." index="3"]
+visible = false
+position = Vector2(-0.68182, 8.40909)
+shape = SubResource("RectangleShape2D_dlfye")
+
+[node name="Hand" parent="Hitbox" index="0"]
+position = Vector2(43.1818, -29.7727)
+shape = SubResource("RectangleShape2D_grnvg")
+disabled = false
+one_way_collision = false
+
+[node name="Feet" parent="Hitbox" index="1"]
+position = Vector2(48.5227, -29.7727)
+shape = SubResource("RectangleShape2D_r34l3")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=3 uid="uid://d4g4jho164g6g"]
+[gd_scene load_steps=78 format=3 uid="uid://d4g4jho164g6g"]
 
 [ext_resource type="Script" path="res://Scripts/CharacterSelect.cs" id="1_p6fwc"]
 [ext_resource type="Texture2D" uid="uid://br8s7b445buel" path="res://Assets/CharSelect/char.gif-ezgif.com-gif-to-sprite-converter.png" id="2_djgq6"]
@@ -12,18 +12,26 @@
 [ext_resource type="Texture2D" uid="uid://sdfvhqawjlt6" path="res://Assets/Ken/Idle/ken1.png" id="11_yhysv"]
 [ext_resource type="Texture2D" uid="uid://cp12cpfrno75p" path="res://Assets/Ken/Idle/ken2.png" id="12_2h7og"]
 [ext_resource type="Texture2D" uid="uid://cnkomhfjtx07r" path="res://Assets/CharSelect/SelectionCursorPlayer2.png" id="12_dyb6i"]
-[ext_resource type="Texture2D" uid="uid://b7u3652ven81u" path="res://Assets/Dan/idle/dan1.png" id="12_rv6ij"]
 [ext_resource type="Texture2D" uid="uid://bh2xhud0aodbr" path="res://Assets/Ken/Idle/ken3.png" id="13_jjwon"]
-[ext_resource type="Texture2D" uid="uid://nwtdlf1a8h3q" path="res://Assets/Dan/idle/dan2.png" id="13_yuyrn"]
 [ext_resource type="Texture2D" uid="uid://c8pwbpxs7wg1g" path="res://Assets/Ken/Idle/ken4.png" id="14_480m0"]
-[ext_resource type="Texture2D" uid="uid://bwkbipssn8ai8" path="res://Assets/Dan/idle/dan3.png" id="14_p86ga"]
-[ext_resource type="Texture2D" uid="uid://c4864ienki6gu" path="res://Assets/Dan/idle/dan4.png" id="15_nxbm4"]
 [ext_resource type="Texture2D" uid="uid://de0wfr3whv3qv" path="res://Assets/Ken/Idle/ken5.png" id="15_rir80"]
-[ext_resource type="Texture2D" uid="uid://d1qtu086glvnf" path="res://Assets/Dan/idle/dan5.png" id="16_nt8oe"]
 [ext_resource type="Texture2D" uid="uid://bps7pm36o6q71" path="res://Assets/Ken/Idle/ken6.png" id="16_v2l41"]
+[ext_resource type="Texture2D" uid="uid://df4fofu83mnue" path="res://Assets/Ryu/idle/0.png" id="20_xvr3d"]
+[ext_resource type="Texture2D" uid="uid://480a622ej3g0" path="res://Assets/Ryu/idle/1.png" id="21_r6knw"]
 [ext_resource type="Texture2D" uid="uid://bcpv1q7pygr2c" path="res://Assets/Ken/kenselect1.png" id="22_if587"]
+[ext_resource type="Texture2D" uid="uid://bmjyyj1llfn0m" path="res://Assets/Ryu/idle/3.png" id="22_jii0e"]
 [ext_resource type="Texture2D" uid="uid://cu8fsfyfrvy8t" path="res://Assets/Ken/kenselect2.png" id="23_6tsdx"]
+[ext_resource type="Texture2D" uid="uid://cot6dilu1v6cr" path="res://Assets/Ryu/idle/4.png" id="23_gho5g"]
 [ext_resource type="Texture2D" uid="uid://b6cgi7csyeajk" path="res://Assets/Ken/kenselect3.png" id="24_ot1tn"]
+[ext_resource type="Texture2D" uid="uid://d0c8gwnjdh16f" path="res://Assets/Ryu/idle/5.png" id="24_yysiw"]
+[ext_resource type="Texture2D" uid="uid://ckjsmopdf8vjr" path="res://Assets/Ryu/idle/6.png" id="25_gjdt1"]
+[ext_resource type="Texture2D" uid="uid://w4v463084n6i" path="res://Assets/Ryu/select1.png" id="26_6h7kr"]
+[ext_resource type="Texture2D" uid="uid://deukdalcyopou" path="res://Assets/Ryu/select2.png" id="27_ud47s"]
+[ext_resource type="Texture2D" uid="uid://ckmf1whrbifhs" path="res://Assets/Ryu/select3.png" id="28_ghduj"]
+[ext_resource type="Texture2D" uid="uid://kvf30sddp713" path="res://Assets/Ryu/select4.png" id="29_1mm44"]
+[ext_resource type="Texture2D" uid="uid://1hksdjwpdy1p" path="res://Assets/Ryu/select5.png" id="30_d6sxc"]
+[ext_resource type="Texture2D" uid="uid://b0ver0w0sjle4" path="res://Assets/Ryu/select6.png" id="31_8xads"]
+[ext_resource type="Texture2D" uid="uid://hi0mn7guwnxm" path="res://Assets/Ryu/select7.png" id="32_gkj3b"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xryer"]
 atlas = ExtResource("2_djgq6")
@@ -338,26 +346,6 @@ animations = [{
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("12_rv6ij")
-}, {
-"duration": 1.0,
-"texture": ExtResource("13_yuyrn")
-}, {
-"duration": 1.0,
-"texture": ExtResource("14_p86ga")
-}, {
-"duration": 1.0,
-"texture": ExtResource("15_nxbm4")
-}, {
-"duration": 1.0,
-"texture": ExtResource("16_nt8oe")
-}],
-"loop": true,
-"name": &"DanIdle",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
 "texture": ExtResource("11_yhysv")
 }, {
 "duration": 1.0,
@@ -392,6 +380,55 @@ animations = [{
 "loop": false,
 "name": &"KenSelect",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("20_xvr3d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_r6knw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_jii0e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_gho5g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_yysiw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_gjdt1")
+}],
+"loop": true,
+"name": &"RyuIdle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("26_6h7kr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_ud47s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_ghduj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_1mm44")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_d6sxc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_8xads")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_gkj3b")
+}],
+"loop": false,
+"name": &"RyuSelect",
+"speed": 5.0
 }]
 
 [node name="CharacterSelect" type="Control"]
@@ -422,7 +459,7 @@ offset_bottom = 91.52
 theme_override_constants/h_separation = 10
 columns = 5
 
-[node name="Dan" type="TextureRect" parent="GridContainer" groups=["Character"]]
+[node name="Ryu" type="TextureRect" parent="GridContainer" groups=["Character"]]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 texture = ExtResource("2_onfh6")
@@ -458,12 +495,14 @@ player2Text = ExtResource("12_dyb6i")
 portraitOffset = Vector2(42, 36)
 
 [node name="P1Preview" type="TextureRect" parent="."]
+layout_mode = 0
 offset_left = 284.0
 offset_top = 223.0
 offset_right = 497.0
 offset_bottom = 496.0
 
 [node name="P2Preview" type="TextureRect" parent="."]
+layout_mode = 0
 offset_left = 713.0
 offset_top = 223.0
 offset_right = 926.0
@@ -475,14 +514,16 @@ position = Vector2(605, 382)
 zoom = Vector2(1.99, 1.464)
 
 [node name="P1AnimatedSprite" type="AnimatedSprite2D" parent="."]
-position = Vector2(383, 496)
+position = Vector2(387, 543.75)
+scale = Vector2(1.30769, 1.24257)
 sprite_frames = SubResource("SpriteFrames_52qea")
 animation = &"KenSelect"
 frame = 2
 frame_progress = 1.0
 
 [node name="P2AnimatedSprite" type="AnimatedSprite2D" parent="."]
-position = Vector2(817, 499)
+position = Vector2(835.25, 543)
+scale = Vector2(1.308, 1.24)
 sprite_frames = SubResource("SpriteFrames_52qea")
-animation = &"DanIdle"
+animation = &"RyuSelect"
 flip_h = true

@@ -50,7 +50,6 @@
 [ext_resource type="Texture2D" uid="uid://bwonrqjasu31t" path="res://Assets/Dan/walk/walk2.png" id="48_6jhqo"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_mi86u"]
-load_path = "res://.godot/imported/dan0.png-3b68c53e9d090401023a6d32e5a7f889.ctex"
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_gg75o"]
 animations = [{

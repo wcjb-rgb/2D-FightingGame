@@ -7,25 +7,25 @@ public partial class Cursor : Sprite2D
     private Dictionary<string, PackedScene> players = new Dictionary<string, PackedScene>()
     {
         { "Ken", (PackedScene)ResourceLoader.Load("res://Scenes/ken1.tscn") },
-        { "Dan", (PackedScene)ResourceLoader.Load("res://Scenes/dan.tscn") }
+        { "Ryu", (PackedScene)ResourceLoader.Load("res://Scenes/ryu.tscn")}
     };
 
     private Dictionary<string, Texture2D> previewImages = new Dictionary<string, Texture2D>()
     {
      { "Ken", ResourceLoader.Load("res://Assets/CharSelect/KenPreview.png") as Texture2D },
-     { "Dan", ResourceLoader.Load("res://Assets/CharSelect/RyuPreview.png") as Texture2D },
+     { "Ryu", ResourceLoader.Load("res://Assets/CharSelect/RyuPreview.png") as Texture2D },
     };
 
     private Dictionary<string, string> idleAnimations = new Dictionary<string, string>()
     {
         { "Ken", "KenIdle" },
-        { "Dan", "DanIdle" }
+        { "Ryu", "RyuIdle" }
     };
 
     private Dictionary<string, string> selectAnimations = new Dictionary<string, string>()
     {
         { "Ken", "KenSelect" },
-        { "Dan", "DanSelect" }
+        { "Ryu", "RyuSelect" }
     };
 
     private List<Node> characters = new List<Node>();
@@ -42,6 +42,9 @@ public partial class Cursor : Sprite2D
 
     private TextureRect p1Preview;
     private TextureRect p2Preview;
+
+    private bool selectionComplete = false;
+
 
     public override void _Ready()
     {
@@ -71,10 +74,18 @@ public partial class Cursor : Sprite2D
             string firstCharacterName = characters[0].Name;
             PlayIdleAnimation(p1AnimatedSprite, firstCharacterName);
         }
+
+        currentSelected = 0;
+
+        UpdateHoverAnimation();
+        
     }
 
     public override void _Process(double delta)
     {
+         if (selectionComplete)
+        return;
+
         if (Input.IsActionJustPressed("p1_right"))
         {
             currentSelected++;
@@ -147,6 +158,8 @@ public partial class Cursor : Sprite2D
         {
             global.Player2Character = players[selectedCharacterName];
             PlaySelectAnimation(p2AnimatedSprite, selectedCharacterName);
+
+            selectionComplete = true;
 
             await ToSignal(GetTree().CreateTimer(1.0f), "timeout");
 
