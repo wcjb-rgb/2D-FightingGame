@@ -182,7 +182,7 @@ public partial class Player : CharacterBody2D
 
     public void PlayBlockReaction()
     {
-        GD.Print($"🛡️ {PlayerName} is blocking!");
+        GD.Print($"{PlayerName} is blocking!");
         
         if (_anim.HasAnimation("block"))
         {
@@ -206,7 +206,7 @@ public partial class Player : CharacterBody2D
 
     public void PlayHitReaction()
     {
-        GD.Print($"⚡ {PlayerName} got hit!");
+        GD.Print($"{PlayerName} got hit!");
 
         _anim.Play("hit");
 
@@ -232,12 +232,18 @@ public partial class Player : CharacterBody2D
         currentHealth -= damage;
         if (currentHealth < 0) currentHealth = 0;
 
-        GD.Print($"💔 {PlayerName} Health: {currentHealth}");
+        GD.Print($" {PlayerName} Health: {currentHealth}");
 
         if (healthBarManager != null)
         {
             healthBarManager.UpdateHealthBar(PlayerName, currentHealth, MaxHealth);
         }
+
+        if (currentHealth <= 0)
+    {
+        GD.Print($"{PlayerName} is KO! Closing game...");
+        GetTree().ChangeSceneToFile("res://main.tscn");
+    }
     }
 
     private void DisableMovement(float duration)
