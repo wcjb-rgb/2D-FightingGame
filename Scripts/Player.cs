@@ -29,6 +29,8 @@ public partial class Player : CharacterBody2D
     public override void _Ready()
     {
     _anim = GetNode<AnimationPlayer>("AnimationPlayer");
+    _anim.Connect("animation_finished", new Callable(this, nameof(OnAnimationFinished)));
+    _anim = GetNode<AnimationPlayer>("AnimationPlayer");
     _attackCooldown = GetNode<Timer>("AttackCooldown");
     _attackCooldown.Timeout += () =>
     {
@@ -170,8 +172,7 @@ public partial class Player : CharacterBody2D
     public bool IsBlocking()
     {
         bool holdingBack = (_isFacingRight && Input.IsActionPressed(moveLeft)) || (!_isFacingRight && Input.IsActionPressed(moveRight));
-        bool holdingDown = Input.IsActionPressed(down);
-        return holdingBack && !holdingDown; 
+        return holdingBack; 
     }
 
     public bool IsCrouching()
@@ -211,6 +212,20 @@ public partial class Player : CharacterBody2D
 
         DisableMovement(0.3f); 
     }
+
+    private void OnAnimationFinished(string animName)
+{
+    if (animName == "crouch_block")
+    {
+        _state = PlayerState.Crouching;
+        if (_anim.HasAnimation("crouch"))
+        {
+            _anim.Play("crouch");
+            _anim.Seek(0.3f, true); 
+        }
+    }
+}
+
 
     public void TakeDamage(int damage)
     {
