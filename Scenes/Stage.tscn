@@ -79,10 +79,10 @@ animations = [{
 script = ExtResource("1_u0uen")
 
 [node name="Player1Spawn" type="Marker2D" parent="."]
-position = Vector2(419, 432)
+position = Vector2(369, 502)
 
 [node name="Player2Spawn" type="Marker2D" parent="."]
-position = Vector2(883, 456)
+position = Vector2(870, 502)
 
 [node name="Area2D" type="StaticBody2D" parent="."]
 position = Vector2(34, 50)
@@ -102,6 +102,11 @@ shape = SubResource("RectangleShape2D_08br2")
 position = Vector2(-102, 400)
 shape = SubResource("RectangleShape2D_08br2")
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="HUD" parent="CanvasLayer" instance=ExtResource("2_csun6")]
+
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(634, 451)
 zoom = Vector2(1.305, 1.305)
@@ -110,11 +115,11 @@ CameraSpeed = 2.0
 MinX = 492.0
 MaxX = 775.0
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+layer = -2
+follow_viewport_enabled = true
 
-[node name="HUD" parent="CanvasLayer" instance=ExtResource("2_csun6")]
-
-[node name="Background" type="AnimatedSprite2D" parent="."]
+[node name="Background" type="AnimatedSprite2D" parent="CanvasLayer2"]
 position = Vector2(639.595, 354.781)
 scale = Vector2(2.02027, 2.26171)
 sprite_frames = SubResource("SpriteFrames_638dm")

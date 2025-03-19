@@ -129,6 +129,7 @@ public partial class Hurtbox : Area2D
         if (Health <= 0)
         {
             GD.Print($"{PlayerName} is KO!");
+            GetTree().ChangeSceneToFile("res://main.tscn");
         }
     }
 }

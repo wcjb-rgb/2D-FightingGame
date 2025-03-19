@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://Scripts/CharacterSelect.cs" id="1_p6fwc"]
 [ext_resource type="Texture2D" uid="uid://br8s7b445buel" path="res://Assets/CharSelect/char.gif-ezgif.com-gif-to-sprite-converter.png" id="2_djgq6"]
-[ext_resource type="Texture2D" uid="uid://c77yqv0qtvnnp" path="res://Assets/CharSelect/dan.png" id="2_onfh6"]
 [ext_resource type="Texture2D" uid="uid://k6lma2x1n1kq" path="res://Assets/CharSelect/ken.png" id="3_5vki7"]
+[ext_resource type="Texture2D" uid="uid://ldxmf3tr31g2" path="res://Assets/CharSelect/Ryu.png" id="3_ditwn"]
 [ext_resource type="Texture2D" uid="uid://bt8y2vwk23mse" path="res://Assets/CharSelect/random1.png" id="4_fleej"]
 [ext_resource type="Texture2D" uid="uid://cml3q1b6s36nr" path="res://Assets/CharSelect/chunli.png" id="5_76iyo"]
 [ext_resource type="Texture2D" uid="uid://mr8ixm48jv67" path="res://Assets/CharSelect/honda.png" id="6_k16y8"]
@@ -462,7 +462,7 @@ columns = 5
 [node name="Ryu" type="TextureRect" parent="GridContainer" groups=["Character"]]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
-texture = ExtResource("2_onfh6")
+texture = ExtResource("3_ditwn")
 
 [node name="Ken" type="TextureRect" parent="GridContainer" groups=["Character"]]
 custom_minimum_size = Vector2(32, 32)

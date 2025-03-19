@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cmf7s5at4te8m"
-path="res://.godot/imported/Game Boy Advance - Street Fighter Alpha 3 - Character Menu.png-a8eea36fe2a3e27b4c8fc7d906299e88.ctex"
+uid="uid://ldxmf3tr31g2"
+path="res://.godot/imported/Ryu.png-955f55669e9dccd27bb32945bb493f75.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/CharSelect/Game Boy Advance - Street Fighter Alpha 3 - Character Menu.png"
-dest_files=["res://.godot/imported/Game Boy Advance - Street Fighter Alpha 3 - Character Menu.png-a8eea36fe2a3e27b4c8fc7d906299e88.ctex"]
+source_file="res://Assets/CharSelect/Ryu.png"
+dest_files=["res://.godot/imported/Ryu.png-955f55669e9dccd27bb32945bb493f75.ctex"]
 
 [params]
 

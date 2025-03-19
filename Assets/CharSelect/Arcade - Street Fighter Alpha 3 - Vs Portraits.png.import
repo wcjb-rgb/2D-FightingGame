@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c77yqv0qtvnnp"
-path="res://.godot/imported/dan.png-2e4688bd5aee2aca6a61b665e7b1866f.ctex"
+uid="uid://cyb3ue70i5g32"
+path="res://.godot/imported/Arcade - Street Fighter Alpha 3 - Vs Portraits.png-e2dea4deafcfe0857994d5ad6c9964ff.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/CharSelect/dan.png"
-dest_files=["res://.godot/imported/dan.png-2e4688bd5aee2aca6a61b665e7b1866f.ctex"]
+source_file="res://Assets/CharSelect/Arcade - Street Fighter Alpha 3 - Vs Portraits.png"
+dest_files=["res://.godot/imported/Arcade - Street Fighter Alpha 3 - Vs Portraits.png-e2dea4deafcfe0857994d5ad6c9964ff.ctex"]
 
 [params]
 

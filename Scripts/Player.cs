@@ -3,7 +3,7 @@ using System;
 
 public partial class Player : CharacterBody2D
 {
-    [Export] public float Speed = 350f;
+    [Export] public float Speed = 380f;
     [Export] public float JumpForce = -1000f;
     [Export] public float Gravity = 1600f;
     [Export] public int PlayerID = 1;

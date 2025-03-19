@@ -1,6 +1,7 @@
-[gd_scene load_steps=89 format=3 uid="uid://cm04ca8foh07f"]
+[gd_scene load_steps=90 format=3 uid="uid://cm04ca8foh07f"]
 
 [ext_resource type="PackedScene" uid="uid://b7pomkmriwkpb" path="res://Scenes/player.tscn" id="1_hxmb6"]
+[ext_resource type="Texture2D" uid="uid://ldxmf3tr31g2" path="res://Assets/CharSelect/Ryu.png" id="2_4jo0y"]
 [ext_resource type="Texture2D" uid="uid://ky4ax25blw30" path="res://Assets/Ryu/attack/HK0.png" id="2_6gxyg"]
 [ext_resource type="Texture2D" uid="uid://cisaq8dxh0wwq" path="res://Assets/Ryu/attack/HK1.png" id="3_m1auv"]
 [ext_resource type="Texture2D" uid="uid://dhaj36ao3j3rx" path="res://Assets/Ryu/attack/HK2.png" id="4_rgjrm"]
@@ -1027,10 +1028,10 @@ tracks/1/path = NodePath(".:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.133333, 0.233333, 0.333333, 0.466667, 0.566667, 0.7),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.133333, 0.233333, 0.333333, 0.466667, 0.666667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6]
+"values": [0, 1, 2, 3, 4, 5]
 }
 
 [sub_resource type="Animation" id="Animation_k1r3r"]
@@ -1123,10 +1124,11 @@ size = Vector2(55, 29.3182)
 size = Vector2(49.3182, 44.0909)
 
 [node name="Ryu" instance=ExtResource("1_hxmb6")]
+PortraitTexture = ExtResource("2_4jo0y")
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_apkxy")
-animation = &"crouch"
+animation = &"jump"
 frame = 1
 
 [node name="AnimationPlayer" parent="." index="1"]
