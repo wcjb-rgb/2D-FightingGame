@@ -44,6 +44,7 @@ public partial class HUD : Control
         if (totalTime == 0)
         {
             timer.Stop();
+	    GetTree().ChangeSceneToFile("res://main.tscn");
         }
     }
 
