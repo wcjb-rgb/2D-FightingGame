@@ -58,6 +58,8 @@ public partial class Player : CharacterBody2D
 
     UpdateFacingDirection();
 
+    DontStandOn();
+
     if (_state == PlayerState.Crouching && !Input.IsActionPressed(down))
     {
         float direction = Input.GetActionStrength(moveRight) - Input.GetActionStrength(moveLeft);
@@ -309,4 +311,16 @@ public partial class Player : CharacterBody2D
     {
         return PortraitTexture;
     }
+
+    private void DontStandOn()
+	{
+	    if(IsOnFloor() && _state == PlayerState.Idle)
+			if (opponent.Position.Y - this.Position.Y > 50)
+			{
+				{
+					GD.Print("JUMP");
+					this.GlobalPosition += new Vector2(50,0);                    
+				}
+			}
+	}
 }
