@@ -23,7 +23,6 @@ public partial class HUD : Control
         timer.Timeout += OnTimerTimeout;
 
         timer.WaitTime = 1.0f;
-        timer.Start();
 
         UpdateTimerDisplay();
 

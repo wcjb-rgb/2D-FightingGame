@@ -4,28 +4,34 @@ using System.Threading.Tasks;
 
 public partial class Cursor : Sprite2D
 {
+    private AudioStreamPlayer moveSound;
+    private AudioStreamPlayer selectSound;  
     private Dictionary<string, PackedScene> players = new Dictionary<string, PackedScene>()
     {
         { "Ken", (PackedScene)ResourceLoader.Load("res://Scenes/ken1.tscn") },
-        { "Ryu", (PackedScene)ResourceLoader.Load("res://Scenes/ryu.tscn")}
+        { "Ryu", (PackedScene)ResourceLoader.Load("res://Scenes/ryu.tscn")},
+        { "Honda", (PackedScene)ResourceLoader.Load("res://Scenes/honda.tscn") }
     };
 
     private Dictionary<string, Texture2D> previewImages = new Dictionary<string, Texture2D>()
     {
      { "Ken", ResourceLoader.Load("res://Assets/CharSelect/KenPreview.png") as Texture2D },
      { "Ryu", ResourceLoader.Load("res://Assets/CharSelect/RyuPreview.png") as Texture2D },
+     { "Honda", ResourceLoader.Load("res://Assets/CharSelect/HondaPreview.png") as Texture2D },
     };
 
     private Dictionary<string, string> idleAnimations = new Dictionary<string, string>()
     {
         { "Ken", "KenIdle" },
-        { "Ryu", "RyuIdle" }
+        { "Ryu", "RyuIdle" },
+        { "Honda", "HondaIdle" },
     };
 
     private Dictionary<string, string> selectAnimations = new Dictionary<string, string>()
     {
         { "Ken", "KenSelect" },
-        { "Ryu", "RyuSelect" }
+        { "Ryu", "RyuSelect" },
+        { "Honda", "HondaSelect" }
     };
 
     private List<Node> characters = new List<Node>();
@@ -51,6 +57,9 @@ public partial class Cursor : Sprite2D
         gridContainer = GetParent().GetNode<GridContainer>("GridContainer");
         p1AnimatedSprite = GetNode<AnimatedSprite2D>("../P1AnimatedSprite");
         p2AnimatedSprite = GetNode<AnimatedSprite2D>("../P2AnimatedSprite");
+
+        moveSound = GetNode<AudioStreamPlayer>("../Hover");
+        selectSound = GetNode<AudioStreamPlayer>("../Select");
 
         p2AnimatedSprite.Visible = false;
 
@@ -91,6 +100,7 @@ public partial class Cursor : Sprite2D
             currentSelected++;
             if (currentSelected >= characters.Count)
                 currentSelected = 0;
+            moveSound.Play();
             UpdateHoverAnimation();
         }
         else if (Input.IsActionJustPressed("p1_left"))
@@ -98,6 +108,7 @@ public partial class Cursor : Sprite2D
             currentSelected--;
             if (currentSelected < 0)
                 currentSelected = characters.Count - 1;
+            moveSound.Play();
             UpdateHoverAnimation();
         }
 
@@ -147,8 +158,9 @@ public partial class Cursor : Sprite2D
         if (global.Player1Character == null)
         {
             global.Player1Character = players[selectedCharacterName];
+            selectSound.Play();
             PlaySelectAnimation(p1AnimatedSprite, selectedCharacterName);
-
+            
             Texture = player2Text;
 
             p2AnimatedSprite.Visible = true;
@@ -157,13 +169,15 @@ public partial class Cursor : Sprite2D
         else
         {
             global.Player2Character = players[selectedCharacterName];
+            selectSound.Play();
             PlaySelectAnimation(p2AnimatedSprite, selectedCharacterName);
 
             selectionComplete = true;
 
             await ToSignal(GetTree().CreateTimer(1.0f), "timeout");
 
-            GetTree().ChangeSceneToFile("res://Scenes/Stage.tscn");
+            var transition = (SceneTransistion)GetNode("/root/Transition");
+            await transition.TransitionToScene("res://Scenes/Stage.tscn");
         }
     }
 

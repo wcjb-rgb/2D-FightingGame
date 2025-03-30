@@ -10,28 +10,36 @@ public partial class Player : CharacterBody2D
     [Export] public int MaxHealth = 100;
     [Export] public Texture2D PortraitTexture;
     private int currentHealth;
-    private bool canMove = true; 
+    public bool canMove = true; 
     public string PlayerName;
     private HealthBarManager healthBarManager;
     private AnimationPlayer _anim;
     private Timer _attackCooldown;
+    private AudioStreamPlayer _hitSound;
+    private AudioStreamPlayer _blockSound;
+    private AudioStreamPlayer _attackSound;
     private bool _isFacingRight = true;
     private Player opponent;
-    private enum PlayerState { Idle, Moving, Jumping, Attacking, Crouching }
+    private enum PlayerState { Idle, Moving, Jumping, Attacking, Crouching, KO }
     private PlayerState _state = PlayerState.Idle;
-
     private string moveLeft, moveRight, jump, down, attackLP, attackLK, attackHP, attackHK;
-
     public bool isKnockedBack = false;
     public float knockbackDuration = 0.3f;
     public float knockbackDecayRate = 300f;
     private float knockbackTimer = 0f;
+
+    [Signal] public delegate void VictoryAnimationFinishedEventHandler(Player winner);
+
     public override void _Ready()
     {
     _anim = GetNode<AnimationPlayer>("AnimationPlayer");
     _anim.Connect("animation_finished", new Callable(this, nameof(OnAnimationFinished)));
     _anim = GetNode<AnimationPlayer>("AnimationPlayer");
     _attackCooldown = GetNode<Timer>("AttackCooldown");
+    _hitSound = GetNode<AudioStreamPlayer>("Hit");
+    _blockSound = GetNode<AudioStreamPlayer>("Block");
+    _attackSound = GetNode<AudioStreamPlayer>("Attack");
+
     _attackCooldown.Timeout += () =>
     {
         if (_state == PlayerState.Attacking)
@@ -52,7 +60,7 @@ public partial class Player : CharacterBody2D
     }
     public override void _PhysicsProcess(double delta)
     {
-    if (!canMove) return;
+    if (!canMove || _state == PlayerState.KO) return;
     
     ApplyGravity();
 
@@ -184,11 +192,8 @@ public partial class Player : CharacterBody2D
     {
         GD.Print($"{PlayerName} is blocking!");
         
-        if (_anim.HasAnimation("block"))
-        {
-            _anim.Play("block");
-        }
-
+        _anim.Play("block");
+        _blockSound?.Play();
         DisableMovement(0.2f); 
     }
 
@@ -199,6 +204,7 @@ public partial class Player : CharacterBody2D
         if (_anim.HasAnimation("crouch_block"))
         {
             _anim.Play("crouch_block");
+            _blockSound?.Play();
         }
 
         DisableMovement(0.1f); 
@@ -209,23 +215,35 @@ public partial class Player : CharacterBody2D
         GD.Print($"{PlayerName} got hit!");
 
         _anim.Play("hit");
+        _hitSound.Play();
 
         DisableMovement(0.3f); 
     }
 
     private void OnAnimationFinished(string animName)
-{
-    if (animName == "crouch_block")
     {
-        _state = PlayerState.Crouching;
-        if (_anim.HasAnimation("crouch"))
+        if (animName == "crouch_block")
         {
-            _anim.Play("crouch");
-            _anim.Seek(0.3f, true); 
+            _state = PlayerState.Crouching;
+            if (_anim.HasAnimation("crouch"))
+            {
+                _anim.Play("crouch");
+                _anim.Seek(0.3f, true); 
+            }
         }
-    }
-}
 
+        if (animName == "ko")
+        {
+            Engine.TimeScale = 1f;
+
+            opponent._anim.Play("Victory");
+        }
+
+        if (animName == "Victory")
+        {
+            EmitSignal(SignalName.VictoryAnimationFinished, this);
+        }
+        }
 
     public void TakeDamage(int damage)
     {
@@ -240,10 +258,23 @@ public partial class Player : CharacterBody2D
         }
 
         if (currentHealth <= 0)
-    {
-        GD.Print($"{PlayerName} is KO! Closing game...");
-        GetTree().ChangeSceneToFile("res://main.tscn");
+        {
+            TriggerKO();
+        }
     }
+
+    private void TriggerKO()
+    {
+        canMove = false;
+        _state = PlayerState.KO;
+
+        if (_anim.HasAnimation("ko"))
+            _anim.Play("ko");
+
+        if (opponent != null)
+            opponent.canMove = false;
+
+        Engine.TimeScale = 0.5f;
     }
 
     private void DisableMovement(float duration)
@@ -302,6 +333,7 @@ public partial class Player : CharacterBody2D
         _state = PlayerState.Attacking;
         Velocity = Vector2.Zero;
         _anim.Play(attackType);
+        _attackSound?.Play();
         _attackCooldown.Start(0.4f);
     }
 

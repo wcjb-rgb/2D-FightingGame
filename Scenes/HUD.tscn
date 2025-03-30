@@ -35,12 +35,12 @@ script = ExtResource("1_fgap4")
 
 [node name="Player1Healthbar" type="TextureProgressBar" parent="Healthbar"]
 layout_mode = 0
-offset_left = 687.0
+offset_left = 86.0
 offset_top = 38.0
-offset_right = 1195.0
+offset_right = 594.0
 offset_bottom = 84.0
+scale = Vector2(1.02182, 1)
 value = 1.0
-fill_mode = 1
 nine_patch_stretch = true
 texture_under = ExtResource("2_cqajn")
 texture_progress = ExtResource("2_cqajn")
@@ -49,11 +49,12 @@ tint_progress = Color(1, 1, 0, 1)
 
 [node name="Player2Healthbar" type="TextureProgressBar" parent="Healthbar"]
 layout_mode = 0
-offset_left = 85.0
-offset_top = 38.0
-offset_right = 602.0
-offset_bottom = 84.0
+offset_left = 678.0
+offset_top = 39.0
+offset_right = 1195.0
+offset_bottom = 85.0
 value = 1.0
+fill_mode = 1
 nine_patch_stretch = true
 texture_under = ExtResource("2_cqajn")
 texture_progress = ExtResource("2_cqajn")

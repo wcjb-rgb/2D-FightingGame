@@ -9,4 +9,10 @@ public partial class Global : Node
     {
         SetProcess(false);
     }
+
+    public void ResetCharacterSelection()
+    {
+        Player1Character = null;
+        Player2Character = null;
+    }
 }

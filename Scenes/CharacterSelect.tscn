@@ -1,4 +1,4 @@
-[gd_scene load_steps=78 format=3 uid="uid://d4g4jho164g6g"]
+[gd_scene load_steps=93 format=3 uid="uid://d4g4jho164g6g"]
 
 [ext_resource type="Script" path="res://Scripts/CharacterSelect.cs" id="1_p6fwc"]
 [ext_resource type="Texture2D" uid="uid://br8s7b445buel" path="res://Assets/CharSelect/char.gif-ezgif.com-gif-to-sprite-converter.png" id="2_djgq6"]
@@ -8,15 +8,26 @@
 [ext_resource type="Texture2D" uid="uid://cml3q1b6s36nr" path="res://Assets/CharSelect/chunli.png" id="5_76iyo"]
 [ext_resource type="Texture2D" uid="uid://mr8ixm48jv67" path="res://Assets/CharSelect/honda.png" id="6_k16y8"]
 [ext_resource type="Texture2D" uid="uid://e8v6q8plgkvt" path="res://Assets/CharSelect/SelectionCursorPlayer1.png" id="10_cw14i"]
+[ext_resource type="Texture2D" uid="uid://brdfujnd1c7vn" path="res://Assets/Honda/Idle/0.png" id="11_j6ep5"]
 [ext_resource type="Script" path="res://Scripts/Cursor.cs" id="11_kwns3"]
 [ext_resource type="Texture2D" uid="uid://sdfvhqawjlt6" path="res://Assets/Ken/Idle/ken1.png" id="11_yhysv"]
 [ext_resource type="Texture2D" uid="uid://cp12cpfrno75p" path="res://Assets/Ken/Idle/ken2.png" id="12_2h7og"]
 [ext_resource type="Texture2D" uid="uid://cnkomhfjtx07r" path="res://Assets/CharSelect/SelectionCursorPlayer2.png" id="12_dyb6i"]
+[ext_resource type="Texture2D" uid="uid://dm6ceind132xs" path="res://Assets/Honda/Idle/Arcade - Street Fighter Alpha 3 - E Honda-1-0.png" id="12_rfabl"]
 [ext_resource type="Texture2D" uid="uid://bh2xhud0aodbr" path="res://Assets/Ken/Idle/ken3.png" id="13_jjwon"]
+[ext_resource type="Texture2D" uid="uid://c1ok5gtvbx842" path="res://Assets/Honda/Idle/Arcade - Street Fighter Alpha 3 - E Honda-2-0.png" id="13_o5lfs"]
+[ext_resource type="Texture2D" uid="uid://cv0pdembi6br3" path="res://Assets/Honda/Idle/Arcade - Street Fighter Alpha 3 - E Honda-3-0.png" id="14_84qrn"]
 [ext_resource type="Texture2D" uid="uid://c8pwbpxs7wg1g" path="res://Assets/Ken/Idle/ken4.png" id="14_480m0"]
+[ext_resource type="Texture2D" uid="uid://db5kaudvtxkbx" path="res://Assets/Honda/Idle/Arcade - Street Fighter Alpha 3 - E Honda-4-0.png" id="15_kqw64"]
 [ext_resource type="Texture2D" uid="uid://de0wfr3whv3qv" path="res://Assets/Ken/Idle/ken5.png" id="15_rir80"]
 [ext_resource type="Texture2D" uid="uid://bps7pm36o6q71" path="res://Assets/Ken/Idle/ken6.png" id="16_v2l41"]
+[ext_resource type="Texture2D" uid="uid://me168i00ojt2" path="res://Assets/Honda/Idle/Arcade - Street Fighter Alpha 3 - E Honda-5-0.png" id="16_vig0o"]
+[ext_resource type="Texture2D" uid="uid://ccvogff2ulm8h" path="res://Assets/Honda/Idle/Arcade - Street Fighter Alpha 3 - E Honda-6-0.png" id="17_aag3r"]
+[ext_resource type="Texture2D" uid="uid://g0j4spqqr2ho" path="res://Assets/Honda/Idle/Arcade - Street Fighter Alpha 3 - E Honda-7-0.png" id="18_7pkxb"]
+[ext_resource type="Texture2D" uid="uid://b7nin3vtkce42" path="res://Assets/Honda/select/Arcade - Street Fighter Alpha 3 - E Honda-6-0-01-00-0-0.png" id="19_uyftr"]
+[ext_resource type="Texture2D" uid="uid://16vcdjhvryff" path="res://Assets/Honda/select/Arcade - Street Fighter Alpha 3 - E Honda-6-0-01-00-1-0.png" id="20_702ax"]
 [ext_resource type="Texture2D" uid="uid://df4fofu83mnue" path="res://Assets/Ryu/idle/0.png" id="20_xvr3d"]
+[ext_resource type="Texture2D" uid="uid://cic5d1654ko1w" path="res://Assets/Honda/select/Arcade - Street Fighter Alpha 3 - E Honda-6-0-01-00-2-0.png" id="21_op7pd"]
 [ext_resource type="Texture2D" uid="uid://480a622ej3g0" path="res://Assets/Ryu/idle/1.png" id="21_r6knw"]
 [ext_resource type="Texture2D" uid="uid://bcpv1q7pygr2c" path="res://Assets/Ken/kenselect1.png" id="22_if587"]
 [ext_resource type="Texture2D" uid="uid://bmjyyj1llfn0m" path="res://Assets/Ryu/idle/3.png" id="22_jii0e"]
@@ -32,6 +43,10 @@
 [ext_resource type="Texture2D" uid="uid://1hksdjwpdy1p" path="res://Assets/Ryu/select5.png" id="30_d6sxc"]
 [ext_resource type="Texture2D" uid="uid://b0ver0w0sjle4" path="res://Assets/Ryu/select6.png" id="31_8xads"]
 [ext_resource type="Texture2D" uid="uid://hi0mn7guwnxm" path="res://Assets/Ryu/select7.png" id="32_gkj3b"]
+[ext_resource type="FontFile" uid="uid://bnr3daevodt7n" path="res://Assets/Stage/The Impostor.ttf" id="44_3xvsk"]
+[ext_resource type="AudioStream" uid="uid://uxsiii4fo30d" path="res://Assets/Sound/tunetank.com_cursor-hover-selection.wav" id="45_8lga5"]
+[ext_resource type="AudioStream" uid="uid://b44pvn6ltmwbp" path="res://Assets/Sound/tunetank.com_button-hover-click.wav" id="46_s3bgl"]
+[ext_resource type="AudioStream" uid="uid://df6ktxyudglh3" path="res://Assets/Sound/1 hour - WWE Crowd Cheer Sound Effect-[AudioTrimmer.com].mp3" id="47_dyeoj"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xryer"]
 atlas = ExtResource("2_djgq6")
@@ -346,6 +361,49 @@ animations = [{
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("11_j6ep5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_rfabl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_o5lfs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_84qrn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_kqw64")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_vig0o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_aag3r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_7pkxb")
+}],
+"loop": true,
+"name": &"HondaIdle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("19_uyftr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_702ax")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_op7pd")
+}],
+"loop": false,
+"name": &"HondaSelect",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("11_yhysv")
 }, {
 "duration": 1.0,
@@ -496,17 +554,17 @@ portraitOffset = Vector2(42, 36)
 
 [node name="P1Preview" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = 284.0
-offset_top = 223.0
-offset_right = 497.0
-offset_bottom = 496.0
+offset_left = 285.0
+offset_top = 308.0
+offset_right = 498.0
+offset_bottom = 628.0
 
 [node name="P2Preview" type="TextureRect" parent="."]
 layout_mode = 0
 offset_left = 713.0
-offset_top = 223.0
+offset_top = 308.0
 offset_right = 926.0
-offset_bottom = 496.0
+offset_bottom = 628.0
 flip_h = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -514,16 +572,42 @@ position = Vector2(605, 382)
 zoom = Vector2(1.99, 1.464)
 
 [node name="P1AnimatedSprite" type="AnimatedSprite2D" parent="."]
-position = Vector2(387, 543.75)
+position = Vector2(387, 524)
 scale = Vector2(1.30769, 1.24257)
 sprite_frames = SubResource("SpriteFrames_52qea")
-animation = &"KenSelect"
-frame = 2
-frame_progress = 1.0
+animation = &"RyuIdle"
 
 [node name="P2AnimatedSprite" type="AnimatedSprite2D" parent="."]
-position = Vector2(835.25, 543)
+position = Vector2(829, 524)
 scale = Vector2(1.308, 1.24)
 sprite_frames = SubResource("SpriteFrames_52qea")
-animation = &"RyuSelect"
+animation = &"KenIdle"
 flip_h = true
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 303.0
+offset_top = 170.0
+offset_right = 913.0
+offset_bottom = 225.0
+theme_override_colors/font_color = Color(1, 0.765238, 0.957874, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("44_3xvsk")
+theme_override_font_sizes/font_size = 40
+text = "Choose your Fighter"
+
+[node name="Select" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("45_8lga5")
+volume_db = -1.0
+
+[node name="Hover" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("46_s3bgl")
+volume_db = -1.0
+
+[node name="BackgroundNoise" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("47_dyeoj")
+volume_db = -23.403
+autoplay = true
