@@ -7,12 +7,9 @@ public partial class HUD : Control
     private Timer timer;
     private TextureRect onesSprite;
     private TextureRect tensSprite;
-
 	private TextureRect player1Portrait;
     private TextureRect player2Portrait;
-
     [Export] public Godot.Collections.Array<Texture> timeSprites;
-
     public override void _Ready()
     {
         timer = GetNode<Timer>("Time/Timer");
@@ -31,7 +28,6 @@ public partial class HUD : Control
 
 		AssignPlayerPortraits();
     }
-
     private void OnTimerTimeout()
     {
         if (totalTime > 0)
@@ -45,7 +41,6 @@ public partial class HUD : Control
             timer.Stop();
         }
     }
-
     private void UpdateTimerDisplay()
     {
         int ones = totalTime % 10;
@@ -57,7 +52,6 @@ public partial class HUD : Control
     if (tens >= 0 && tens < timeSprites.Count)
         tensSprite.Texture = (Texture2D)timeSprites[tens];
     }
-
 	private void AssignPlayerPortraits()
     {
         Global global = GetNode<Global>("/root/Global");

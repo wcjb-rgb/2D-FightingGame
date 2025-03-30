@@ -1,4 +1,4 @@
-[gd_scene load_steps=92 format=3 uid="uid://dmngb32w2qlal"]
+[gd_scene load_steps=91 format=3 uid="uid://dmngb32w2qlal"]
 
 [ext_resource type="PackedScene" uid="uid://b7pomkmriwkpb" path="res://Scenes/player.tscn" id="1_dc2jo"]
 [ext_resource type="Texture2D" uid="uid://mr8ixm48jv67" path="res://Assets/CharSelect/honda.png" id="2_l5r7m"]
@@ -1143,9 +1143,6 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3m5no"]
 size = Vector2(100, 98.1818)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_vtjne"]
-size = Vector2(92.7273, 55.9091)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_px8f1"]
 size = Vector2(70.2273, 49.3182)
 
@@ -1172,7 +1169,6 @@ shape = SubResource("RectangleShape2D_3m5no")
 [node name="Detect" parent="." index="3"]
 visible = false
 position = Vector2(1.81818, 17.9545)
-shape = SubResource("RectangleShape2D_vtjne")
 
 [node name="Hand" parent="Hitbox" index="0"]
 position = Vector2(39.5455, -54.0909)

@@ -36,21 +36,16 @@ public partial class Cursor : Sprite2D
 
     private List<Node> characters = new List<Node>();
     private int currentSelected = 0;
-
     [Export] public Texture2D player1Text;
     [Export] public Texture2D player2Text;
     [Export] public Vector2 portraitOffset;
-
     private AnimatedSprite2D p1AnimatedSprite;
     private AnimatedSprite2D p2AnimatedSprite;
     private GridContainer gridContainer;
     private Vector2 initialPosition;
-
     private TextureRect p1Preview;
     private TextureRect p2Preview;
-
     private bool selectionComplete = false;
-
 
     public override void _Ready()
     {
@@ -70,7 +65,6 @@ public partial class Cursor : Sprite2D
                 characters.Add(characterNode);
             }
         }
-        GD.Print(characters.Count + " characters loaded.");
 
         initialPosition = Position;
         Texture = player1Text; 
@@ -89,7 +83,6 @@ public partial class Cursor : Sprite2D
         UpdateHoverAnimation();
         
     }
-
     public override void _Process(double delta)
     {
          if (selectionComplete)
@@ -143,35 +136,26 @@ public partial class Cursor : Sprite2D
             }
         }
     }
+   private async Task SelectCharacter()
+{
+    string selectedCharacterName = characters[currentSelected].Name;
+    Global global = GetNode<Global>("/root/Global");
 
-    private async Task SelectCharacter()
+    if (!players.ContainsKey(selectedCharacterName))
     {
-        string selectedCharacterName = characters[currentSelected].Name;
-        Global global = GetNode<Global>("/root/Global");
+        return;
+    }
 
-        if (!players.ContainsKey(selectedCharacterName))
+    if (global.Player1Character == null)
+    {
+        global.Player1Character = players[selectedCharacterName];
+        selectSound.Play();
+        PlaySelectAnimation(p1AnimatedSprite, selectedCharacterName);
+        
+        if (global.CurrentGameMode == Global.GameMode.SinglePlayer)
         {
-            GD.PrintErr($"Character '{selectedCharacterName}' not found in dictionary!");
-            return;
-        }
-
-        if (global.Player1Character == null)
-        {
-            global.Player1Character = players[selectedCharacterName];
-            selectSound.Play();
-            PlaySelectAnimation(p1AnimatedSprite, selectedCharacterName);
-            
-            Texture = player2Text;
-
-            p2AnimatedSprite.Visible = true;
-            UpdateHoverAnimation();
-        }
-        else
-        {
-            global.Player2Character = players[selectedCharacterName];
-            selectSound.Play();
-            PlaySelectAnimation(p2AnimatedSprite, selectedCharacterName);
-
+            global.Player2Character = players["Ken"];
+            global.Player2IsAI = true;
             selectionComplete = true;
 
             await ToSignal(GetTree().CreateTimer(1.0f), "timeout");
@@ -179,8 +163,29 @@ public partial class Cursor : Sprite2D
             var transition = (SceneTransistion)GetNode("/root/Transition");
             await transition.TransitionToScene("res://Scenes/Stage.tscn");
         }
+        else
+        {
+            Texture = player2Text;
+            p2AnimatedSprite.Visible = true;
+            UpdateHoverAnimation();
+        }
     }
+    else
+    {
+        global.Player2Character = players[selectedCharacterName];
+        global.Player2IsAI = false;
 
+        selectSound.Play();
+        PlaySelectAnimation(p2AnimatedSprite, selectedCharacterName);
+
+        selectionComplete = true;
+
+        await ToSignal(GetTree().CreateTimer(1.0f), "timeout");
+
+        var transition = (SceneTransistion)GetNode("/root/Transition");
+        await transition.TransitionToScene("res://Scenes/Stage.tscn");
+    }
+}
     private void PlayIdleAnimation(AnimatedSprite2D sprite, string characterName)
     {
         if (!idleAnimations.ContainsKey(characterName))

@@ -1,4 +1,4 @@
-[gd_scene load_steps=104 format=3 uid="uid://cm04ca8foh07f"]
+[gd_scene load_steps=110 format=3 uid="uid://cm04ca8foh07f"]
 
 [ext_resource type="PackedScene" uid="uid://b7pomkmriwkpb" path="res://Scenes/player.tscn" id="1_hxmb6"]
 [ext_resource type="Texture2D" uid="uid://ldxmf3tr31g2" path="res://Assets/CharSelect/Ryu.png" id="2_4jo0y"]
@@ -64,10 +64,15 @@
 [ext_resource type="Texture2D" uid="uid://26jtip2d3nke" path="res://Assets/Ryu/jump/Arcade - Street Fighter Alpha Zero - Ryu-4-0.png" id="45_kuro3"]
 [ext_resource type="Texture2D" uid="uid://bnt45r57elb7u" path="res://Assets/Ryu/jump/Arcade - Street Fighter Alpha Zero - Ryu-5-0.png" id="46_sb5il"]
 [ext_resource type="Texture2D" uid="uid://dbbqqwkdegkrm" path="res://Assets/Ryu/jump/Arcade - Street Fighter Alpha Zero - Ryu-7-0.png" id="47_5gx32"]
+[ext_resource type="Texture2D" uid="uid://g71njosyjv1u" path="res://Assets/Ryu/had/Arcade - Street Fighter Alpha Zero - Ryu-0-0.png" id="47_jfekf"]
+[ext_resource type="Texture2D" uid="uid://cara5tu7uojy4" path="res://Assets/Ryu/had/Arcade - Street Fighter Alpha Zero - Ryu-1-0.png" id="48_c0cdk"]
 [ext_resource type="Texture2D" uid="uid://ceid2685b3wdr" path="res://Assets/Ryu/jumpf/Arcade - Street Fighter Alpha Zero - Ryu-00-00.png" id="48_wh8vh"]
 [ext_resource type="Texture2D" uid="uid://clveby0s0wh03" path="res://Assets/Ryu/jumpf/Arcade - Street Fighter Alpha Zero - Ryu-01-00.png" id="49_a6s0u"]
+[ext_resource type="Texture2D" uid="uid://bboe1kamh4i15" path="res://Assets/Ryu/had/Arcade - Street Fighter Alpha Zero - Ryu-2-0.png" id="49_xc30y"]
 [ext_resource type="Texture2D" uid="uid://c73u30hf1w3hy" path="res://Assets/Ryu/jumpf/Arcade - Street Fighter Alpha Zero - Ryu-02-00.png" id="50_p0fih"]
+[ext_resource type="Texture2D" uid="uid://bim08i5bxsorb" path="res://Assets/Ryu/had/Arcade - Street Fighter Alpha Zero - Ryu-3-0.png" id="50_xrik5"]
 [ext_resource type="Texture2D" uid="uid://dhv7pi4wsghl" path="res://Assets/Ryu/jumpf/Arcade - Street Fighter Alpha Zero - Ryu-03-00.png" id="51_trn7a"]
+[ext_resource type="Texture2D" uid="uid://wyi5r2dctaxx" path="res://Assets/Ryu/had/Arcade - Street Fighter Alpha Zero - Ryu-4-0.png" id="51_yau5l"]
 [ext_resource type="Texture2D" uid="uid://bfshni8cjlmgo" path="res://Assets/Ryu/jumpf/Arcade - Street Fighter Alpha Zero - Ryu-04-00.png" id="52_887en"]
 [ext_resource type="Texture2D" uid="uid://bhc50iefwisff" path="res://Assets/Ryu/jumpf/Arcade - Street Fighter Alpha Zero - Ryu-05-00.png" id="53_b1eay"]
 [ext_resource type="Texture2D" uid="uid://cbrngdcgljbkq" path="res://Assets/Ryu/jumpf/Arcade - Street Fighter Alpha Zero - Ryu-06-00.png" id="54_oji8t"]
@@ -266,6 +271,26 @@ animations = [{
 }],
 "loop": true,
 "name": &"crouchblock",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("47_jfekf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("48_c0cdk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("49_xc30y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("50_xrik5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("51_yau5l")
+}],
+"loop": true,
+"name": &"fireball",
 "speed": 5.0
 }, {
 "frames": [{
@@ -1170,6 +1195,72 @@ tracks/1/keys = {
 "values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
 }
 
+[sub_resource type="Animation" id="Animation_ywavi"]
+resource_name = "hadouken"
+length = 0.600003
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"fireball"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3, 0.433333, 0.533333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Hurtbox/hurtbox:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1.13636, 0.681819)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../Hurtbox/hurtbox:shape:size")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(64.2243, 122.756), Vector2(117.594, 122.756)]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("..")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.566667),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"SpawnHadouken"
+}]
+}
+
 [sub_resource type="Animation" id="Animation_x3iwm"]
 resource_name = "hit"
 length = 0.200003
@@ -1437,6 +1528,7 @@ _data = {
 "crouch_block": SubResource("Animation_61s7e"),
 "crouch_hit": SubResource("Animation_m55gh"),
 "forward_jump": SubResource("Animation_qdi2p"),
+"hadouken": SubResource("Animation_ywavi"),
 "hit": SubResource("Animation_x3iwm"),
 "idle": SubResource("Animation_oe5mv"),
 "jump": SubResource("Animation_k8gvw"),
@@ -1459,7 +1551,7 @@ PortraitTexture = ExtResource("2_4jo0y")
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_apkxy")
-animation = &"idle"
+animation = &"HK"
 frame = 1
 
 [node name="AnimationPlayer" parent="." index="1"]
@@ -1473,7 +1565,6 @@ scale = Vector2(1.005, 0.785)
 shape = SubResource("RectangleShape2D_ku8rk")
 
 [node name="Detect" parent="." index="3"]
-visible = false
 position = Vector2(0.454547, 21.8182)
 polygon = PackedVector2Array(-1.81818, 25, 30, -19.0909, 2.72727, -64.5455, -28.6364, -22.7273)
 
@@ -1485,3 +1576,6 @@ one_way_collision = false
 [node name="Feet" parent="Hitbox" index="1"]
 position = Vector2(48.5227, -29.7727)
 shape = SubResource("RectangleShape2D_r34l3")
+
+[node name="Spawn" type="Node2D" parent="." index="10"]
+position = Vector2(58.1818, -22.7273)

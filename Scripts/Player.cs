@@ -9,9 +9,11 @@ public partial class Player : CharacterBody2D
     [Export] public int PlayerID = 1;
     [Export] public int MaxHealth = 100;
     [Export] public Texture2D PortraitTexture;
+    public bool IsAI = false;
     private int currentHealth;
     public bool canMove = true; 
     public string PlayerName;
+    private MotionInputBuffer motionBuffer;
     private HealthBarManager healthBarManager;
     private AnimationPlayer _anim;
     private Timer _attackCooldown;
@@ -22,83 +24,84 @@ public partial class Player : CharacterBody2D
     private Player opponent;
     private enum PlayerState { Idle, Moving, Jumping, Attacking, Crouching, KO }
     private PlayerState _state = PlayerState.Idle;
-    private string moveLeft, moveRight, jump, down, attackLP, attackLK, attackHP, attackHK;
-    public bool isKnockedBack = false;
-    public float knockbackDuration = 0.3f;
-    public float knockbackDecayRate = 300f;
-    private float knockbackTimer = 0f;
-
+    private string moveLeft, moveRight, jump, down, attackLP, attackLK, attackHP, attackHK, hadouken;
+    private PackedScene hadoukenScene = (PackedScene)ResourceLoader.Load("res://Scenes/Hadouken.tscn");
     [Signal] public delegate void VictoryAnimationFinishedEventHandler(Player winner);
-
     public override void _Ready()
     {
-    _anim = GetNode<AnimationPlayer>("AnimationPlayer");
-    _anim.Connect("animation_finished", new Callable(this, nameof(OnAnimationFinished)));
-    _anim = GetNode<AnimationPlayer>("AnimationPlayer");
-    _attackCooldown = GetNode<Timer>("AttackCooldown");
-    _hitSound = GetNode<AudioStreamPlayer>("Hit");
-    _blockSound = GetNode<AudioStreamPlayer>("Block");
-    _attackSound = GetNode<AudioStreamPlayer>("Attack");
+        AddToGroup("Player");
+        _anim = GetNode<AnimationPlayer>("AnimationPlayer");
+        _anim.Connect("animation_finished", new Callable(this, nameof(OnAnimationFinished)));
+        _anim = GetNode<AnimationPlayer>("AnimationPlayer");
+        _attackCooldown = GetNode<Timer>("AttackCooldown");
+        _hitSound = GetNode<AudioStreamPlayer>("Hit");
+        _blockSound = GetNode<AudioStreamPlayer>("Block");
+        _attackSound = GetNode<AudioStreamPlayer>("Attack");
+        motionBuffer = new MotionInputBuffer();
+        AddChild(motionBuffer);
 
-    _attackCooldown.Timeout += () =>
-    {
-        if (_state == PlayerState.Attacking)
-            _state = IsOnFloor() ? PlayerState.Idle : PlayerState.Jumping;
-    };
+        _attackCooldown.Timeout += () =>
+        {
+            if (_state == PlayerState.Attacking)
+                _state = IsOnFloor() ? PlayerState.Idle : PlayerState.Jumping;
+        };
 
-    PlayerName = (PlayerID == 1) ? "Player1" : "Player2";
+        PlayerName = (PlayerID == 1) ? "Player1" : "Player2";
 
-    AssignInputs();
-    CallDeferred("FindOpponent");
-    currentHealth = MaxHealth;
+        AssignInputs();
+        CallDeferred("FindOpponent");
+        currentHealth = MaxHealth;
 
-    Control hud = GetTree().Root.FindChild("HUD", true, false) as Control;
+        Control hud = GetTree().Root.FindChild("HUD", true, false) as Control;
         if (hud != null)
         {
             healthBarManager = hud.GetNode<HealthBarManager>("Healthbar");
         }
+        
+        if (IsAI)
+        {
+            AIBrain brain = new AIBrain();
+            AddChild(brain);
+        }
     }
     public override void _PhysicsProcess(double delta)
     {
-    if (!canMove || _state == PlayerState.KO) return;
-    
-    ApplyGravity();
-
-    UpdateFacingDirection();
-
-    if (_state == PlayerState.Crouching && !Input.IsActionPressed(down))
-    {
-        float direction = Input.GetActionStrength(moveRight) - Input.GetActionStrength(moveLeft);
+        if (!canMove || _state == PlayerState.KO) return;
         
-        if (direction != 0)
+        ApplyGravity();
+        UpdateFacingDirection();
+
+        if (_state == PlayerState.Crouching && !Input.IsActionPressed(down))
         {
-            _state = PlayerState.Moving;
-            _anim.Play((_isFacingRight == (direction > 0)) ? "walk_forward" : "walk_backward");
+            float direction = Input.GetActionStrength(moveRight) - Input.GetActionStrength(moveLeft);
+            if (direction != 0)
+            {
+                _state = PlayerState.Moving;
+                _anim.Play((_isFacingRight == (direction > 0)) ? "walk_forward" : "walk_backward");
+            }
+            else
+            {
+                _state = PlayerState.Idle;
+                _anim.Play("idle");
+            }
         }
-        else
+
+        if (_state != PlayerState.Attacking)
         {
-            _state = PlayerState.Idle;
-            _anim.Play("idle");
+            HandleJumping();
+            HandleMovement();
+            HandleAttack();
         }
-    }
 
-    if (_state != PlayerState.Attacking)
-    {
-        HandleJumping();
-        HandleMovement();
-        HandleAttack();
+        MoveAndSlide();
+        CheckLanding();
+        motionBuffer.AddDirection(GetCurrentDirection());
     }
-
-    MoveAndSlide();
-    CheckLanding();
-    }
-
     private void ApplyGravity()
     {
         if (!IsOnFloor())
             Velocity += new Vector2(0, Gravity * (float)GetProcessDeltaTime());
     }  
-
     private void AssignInputs()
     {
         if (PlayerID == 1)
@@ -112,7 +115,6 @@ public partial class Player : CharacterBody2D
             attackLP = "p2_LP"; attackLK = "p2_LK"; attackHP = "p2_HP"; attackHK = "p2_HK";
         }
     }
-
     private void FindOpponent()
     {
         foreach (Node node in GetParent().GetChildren())
@@ -125,56 +127,58 @@ public partial class Player : CharacterBody2D
         }
     }
 
-     private void UpdateFacingDirection()
+    private void UpdateFacingDirection()
     {
-    if (opponent != null)
-    {
-        bool shouldFaceRight = Position.X < opponent.Position.X;
-
-        if (_isFacingRight != shouldFaceRight)
+        if (opponent != null)
         {
-            _isFacingRight = shouldFaceRight;
+            bool shouldFaceRight = Position.X < opponent.Position.X;
 
-            GetNode<AnimatedSprite2D>("AnimatedSprite2D").FlipH = !_isFacingRight;
-            
-            var hitboxNode = GetNode<Area2D>("Hitbox");
-            hitboxNode.Scale = new Vector2(_isFacingRight ? 1 : -1, 1);
+            if (_isFacingRight != shouldFaceRight)
+            {
+                _isFacingRight = shouldFaceRight;
+
+                GetNode<AnimatedSprite2D>("AnimatedSprite2D").FlipH = !_isFacingRight;
+                
+                var hitboxNode = GetNode<Area2D>("Hitbox");
+                hitboxNode.Scale = new Vector2(_isFacingRight ? 1 : -1, 1);
+
+                var spawnPoint = GetNode<Node2D>("Spawn");
+                spawnPoint.Position = new Vector2(Mathf.Abs(spawnPoint.Position.X) * (_isFacingRight ? 1 : -1), spawnPoint.Position.Y);
+            }
         }
-    }
     }
 
     private void HandleMovement()
     {
-    if (_state == PlayerState.Jumping || _state == PlayerState.Attacking)
-        return;
+        if (_state == PlayerState.Jumping || _state == PlayerState.Attacking)
+            return;
 
-    bool isCrouching = Input.IsActionPressed(down);
+        bool isCrouching = Input.IsActionPressed(down);
 
-    if (isCrouching)
-    {
-        if (_state != PlayerState.Crouching) 
+        if (isCrouching)
         {
-            _state = PlayerState.Crouching;
-            _anim.Play("crouch");
-            Velocity = Vector2.Zero;
+            if (_state != PlayerState.Crouching) 
+            {
+                _state = PlayerState.Crouching;
+                _anim.Play("crouch");
+                Velocity = Vector2.Zero;
+            }
+            return; 
         }
-        return; 
-    }
 
-    float direction = Input.GetActionStrength(moveRight) - Input.GetActionStrength(moveLeft);
+        float direction = Input.GetActionStrength(moveRight) - Input.GetActionStrength(moveLeft);
+        Velocity = new Vector2(direction * Speed, Velocity.Y);
 
-    Velocity = new Vector2(direction * Speed, Velocity.Y);
-
-    if (direction != 0)
-    {
-        _state = PlayerState.Moving;
-        _anim.Play((_isFacingRight == (direction > 0)) ? "walk_forward" : "walk_backward");
-    }
-    else
-    {
-        _state = PlayerState.Idle;
-        _anim.Play("idle");
-    }
+        if (direction != 0)
+        {
+            _state = PlayerState.Moving;
+            _anim.Play((_isFacingRight == (direction > 0)) ? "walk_forward" : "walk_backward");
+        }
+        else
+        {
+            _state = PlayerState.Idle;
+            _anim.Play("idle");
+        }
     }
 
     public bool IsBlocking()
@@ -182,41 +186,27 @@ public partial class Player : CharacterBody2D
         bool holdingBack = (_isFacingRight && Input.IsActionPressed(moveLeft)) || (!_isFacingRight && Input.IsActionPressed(moveRight));
         return holdingBack; 
     }
-
     public bool IsCrouching()
     {
         return Input.IsActionPressed(down);
     }
-
     public void PlayBlockReaction()
     {
-        GD.Print($"{PlayerName} is blocking!");
-        
         _anim.Play("block");
         _blockSound?.Play();
         DisableMovement(0.2f); 
     }
-
     public void PlayCrouchBlockReaction()
     {
-        GD.Print($"🛡️ {PlayerName} is crouch blocking!");
-
-        if (_anim.HasAnimation("crouch_block"))
-        {
-            _anim.Play("crouch_block");
-            _blockSound?.Play();
-        }
-
+        _anim.Play("crouch_block");
+        _blockSound?.Play();
         DisableMovement(0.1f); 
     }
 
     public void PlayHitReaction()
     {
-        GD.Print($"{PlayerName} got hit!");
-
         _anim.Play("hit");
         _hitSound.Play();
-
         DisableMovement(0.3f); 
     }
 
@@ -250,8 +240,6 @@ public partial class Player : CharacterBody2D
         currentHealth -= damage;
         if (currentHealth < 0) currentHealth = 0;
 
-        GD.Print($" {PlayerName} Health: {currentHealth}");
-
         if (healthBarManager != null)
         {
             healthBarManager.UpdateHealthBar(PlayerName, currentHealth, MaxHealth);
@@ -262,7 +250,6 @@ public partial class Player : CharacterBody2D
             TriggerKO();
         }
     }
-
     private void TriggerKO()
     {
         canMove = false;
@@ -326,8 +313,16 @@ public partial class Player : CharacterBody2D
         if (Input.IsActionJustPressed(attackLK)) PerformAttack("LK");
         if (Input.IsActionJustPressed(attackHP)) PerformAttack("HP");
         if (Input.IsActionJustPressed(attackHK)) PerformAttack("HK");
-    }
 
+        string[] hadouken = { "down", "down_forward", "forward" };
+
+        if (motionBuffer.MatchesPattern(hadouken) && Input.IsActionJustPressed(attackLP))
+        {
+            PerformHadouken();
+            motionBuffer.Clear();
+            return;
+        }
+    }
     private void PerformAttack(string attackType)
     {
         _state = PlayerState.Attacking;
@@ -341,4 +336,56 @@ public partial class Player : CharacterBody2D
     {
         return PortraitTexture;
     }
+
+    private void PerformHadouken()
+{
+    _state = PlayerState.Attacking;
+    Velocity = Vector2.Zero;
+    _anim.Play("hadouken");
+    _attackCooldown.Start(0.8f); 
+
+}
+
+public void SpawnHadouken()
+{
+    GD.Print($"{PlayerName} is spawning Hadouken!");
+    if (hadoukenScene == null) return;
+
+    Hadouken hadouken = (Hadouken)hadoukenScene.Instantiate();
+
+    Node2D spawnPoint = GetNode<Node2D>("Spawn");
+    hadouken.Position = spawnPoint.GlobalPosition;
+
+    hadouken.SetDirection(_isFacingRight ? Vector2.Right : Vector2.Left);
+
+    // Pass ownership info
+    hadouken.PlayerID = PlayerID;
+
+    GetTree().Root.AddChild(hadouken);
+}
+
+private string GetCurrentDirection()
+{
+    bool left = Input.IsActionPressed(moveLeft);
+    bool right = Input.IsActionPressed(moveRight);
+    bool downPressed = Input.IsActionPressed(down);
+
+    if (_isFacingRight)
+    {
+        if (downPressed && right) return "down_forward";
+        if (downPressed && left) return "down_back";
+        if (downPressed) return "down";
+        if (right) return "forward";
+        if (left) return "back";
+    }
+    else
+    {
+        if (downPressed && left) return "down_forward";
+        if (downPressed && right) return "down_back";
+        if (downPressed) return "down";
+        if (left) return "forward";
+        if (right) return "back";
+    }
+    return "";
+}
 }
