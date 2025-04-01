@@ -1,11 +1,9 @@
-[gd_scene load_steps=93 format=3 uid="uid://d4g4jho164g6g"]
+[gd_scene load_steps=91 format=3 uid="uid://d4g4jho164g6g"]
 
 [ext_resource type="Script" path="res://Scripts/CharacterSelect.cs" id="1_p6fwc"]
 [ext_resource type="Texture2D" uid="uid://br8s7b445buel" path="res://Assets/CharSelect/char.gif-ezgif.com-gif-to-sprite-converter.png" id="2_djgq6"]
 [ext_resource type="Texture2D" uid="uid://k6lma2x1n1kq" path="res://Assets/CharSelect/ken.png" id="3_5vki7"]
 [ext_resource type="Texture2D" uid="uid://ldxmf3tr31g2" path="res://Assets/CharSelect/Ryu.png" id="3_ditwn"]
-[ext_resource type="Texture2D" uid="uid://bt8y2vwk23mse" path="res://Assets/CharSelect/random1.png" id="4_fleej"]
-[ext_resource type="Texture2D" uid="uid://cml3q1b6s36nr" path="res://Assets/CharSelect/chunli.png" id="5_76iyo"]
 [ext_resource type="Texture2D" uid="uid://mr8ixm48jv67" path="res://Assets/CharSelect/honda.png" id="6_k16y8"]
 [ext_resource type="Texture2D" uid="uid://e8v6q8plgkvt" path="res://Assets/CharSelect/SelectionCursorPlayer1.png" id="10_cw14i"]
 [ext_resource type="Texture2D" uid="uid://brdfujnd1c7vn" path="res://Assets/Honda/Idle/0.png" id="11_j6ep5"]
@@ -510,10 +508,11 @@ anchor_left = 15.275
 anchor_top = 10.062
 anchor_right = 15.275
 anchor_bottom = 10.062
-offset_left = -107.0
+offset_left = -59.0
 offset_top = 59.52
-offset_right = 96.0
+offset_right = 57.0
 offset_bottom = 91.52
+grow_horizontal = 2
 theme_override_constants/h_separation = 10
 columns = 5
 
@@ -527,16 +526,6 @@ custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 texture = ExtResource("3_5vki7")
 
-[node name="Random1" type="TextureRect" parent="GridContainer" groups=["Character"]]
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-texture = ExtResource("4_fleej")
-
-[node name="Chunli" type="TextureRect" parent="GridContainer" groups=["Character"]]
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-texture = ExtResource("5_76iyo")
-
 [node name="Honda" type="TextureRect" parent="GridContainer" groups=["Character"]]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
@@ -545,7 +534,7 @@ texture = ExtResource("6_k16y8")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 1
 z_as_relative = false
-position = Vector2(520, 478)
+position = Vector2(568, 478)
 texture = ExtResource("10_cw14i")
 script = ExtResource("11_kwns3")
 player1Text = ExtResource("10_cw14i")

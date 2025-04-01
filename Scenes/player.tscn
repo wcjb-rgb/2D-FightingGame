@@ -1,18 +1,14 @@
-[gd_scene load_steps=7 format=3 uid="uid://b7pomkmriwkpb"]
+[gd_scene load_steps=4 format=3 uid="uid://b7pomkmriwkpb"]
 
 [ext_resource type="Script" path="res://Scripts/Player.cs" id="1_jfecq"]
 [ext_resource type="Script" path="res://Scripts/Hurtbox.cs" id="2_xkj04"]
 [ext_resource type="Script" path="res://Scripts/Hitbox.cs" id="3_mchs6"]
-[ext_resource type="AudioStream" uid="uid://djhct5d7c31nh" path="res://Assets/Sound/sfii-43-strong-hit-101soundboards.mp3" id="4_gp6p0"]
-[ext_resource type="AudioStream" uid="uid://c7841ta3t1wu7" path="res://Assets/Sound/sfii-51-blocked-101soundboards.mp3" id="5_a56ki"]
-[ext_resource type="AudioStream" uid="uid://ckmtk33ssaw8f" path="res://Assets/Sound/sfii-39-medium-attack-101soundboards.mp3" id="6_cidvd"]
 
 [node name="Player" type="CharacterBody2D" groups=["Players"]]
 scale = Vector2(2.2, 2.2)
 collision_layer = 64
 collision_mask = 192
 script = ExtResource("1_jfecq")
-Speed = 400.0
 JumpForce = -1100.0
 Gravity = 1850.0
 
@@ -45,12 +41,3 @@ disabled = true
 [node name="StateMachine" type="Node" parent="."]
 
 [node name="AttackCooldown" type="Timer" parent="."]
-
-[node name="Hit" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_gp6p0")
-
-[node name="Block" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("5_a56ki")
-
-[node name="Attack" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("6_cidvd")

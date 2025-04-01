@@ -1,44 +1,57 @@
+// Player.cs (Refactored and Organized)
 using Godot;
 using System;
 
 public partial class Player : CharacterBody2D
 {
-    [Export] public float Speed = 380f;
+    // === CONFIGURATION ===
+    [Export] public float Speed = 400f;
     [Export] public float JumpForce = -1000f;
-    [Export] public float Gravity = 1600f;
+    [Export] public float Gravity = 1900f;
     [Export] public int PlayerID = 1;
     [Export] public int MaxHealth = 100;
     [Export] public Texture2D PortraitTexture;
+
+    // === STATE ===
     public bool IsAI = false;
+    public bool canMove = true;
+    private bool isInHitStun = false;
     private int currentHealth;
-    public bool canMove = true; 
     public string PlayerName;
-    private MotionInputBuffer motionBuffer;
-    private HealthBarManager healthBarManager;
+    private PlayerState _state = PlayerState.Idle;
+    private bool _isFacingRight = true;
+
+    // === INPUTS ===
+    private string moveLeft, moveRight, jump, down;
+    private string attackLP, attackLK, attackHP, attackHK;
+
+    // === REFERENCES ===
+    private Player opponent;
     private AnimationPlayer _anim;
     private Timer _attackCooldown;
-    private AudioStreamPlayer _hitSound;
-    private AudioStreamPlayer _blockSound;
-    private AudioStreamPlayer _attackSound;
-    private bool _isFacingRight = true;
-    private Player opponent;
-    private enum PlayerState { Idle, Moving, Jumping, Attacking, Crouching, KO }
-    private PlayerState _state = PlayerState.Idle;
-    private string moveLeft, moveRight, jump, down, attackLP, attackLK, attackHP, attackHK, hadouken;
+    private SoundManager soundManager;
+    private MotionInputBuffer motionBuffer;
+    private HealthBarManager healthBarManager;
     private PackedScene hadoukenScene = (PackedScene)ResourceLoader.Load("res://Scenes/Hadouken.tscn");
+
+    // === ENUMS ===
+    private enum PlayerState { Idle, Moving, Jumping, Attacking, Crouching, KO, Knockdown }
+
+    // === SIGNALS ===
     [Signal] public delegate void VictoryAnimationFinishedEventHandler(Player winner);
+
     public override void _Ready()
     {
         AddToGroup("Player");
+
         _anim = GetNode<AnimationPlayer>("AnimationPlayer");
         _anim.Connect("animation_finished", new Callable(this, nameof(OnAnimationFinished)));
-        _anim = GetNode<AnimationPlayer>("AnimationPlayer");
         _attackCooldown = GetNode<Timer>("AttackCooldown");
-        _hitSound = GetNode<AudioStreamPlayer>("Hit");
-        _blockSound = GetNode<AudioStreamPlayer>("Block");
-        _attackSound = GetNode<AudioStreamPlayer>("Attack");
+
         motionBuffer = new MotionInputBuffer();
         AddChild(motionBuffer);
+
+        soundManager = GetNode<SoundManager>("SoundManager");
 
         _attackCooldown.Timeout += () =>
         {
@@ -46,7 +59,7 @@ public partial class Player : CharacterBody2D
                 _state = IsOnFloor() ? PlayerState.Idle : PlayerState.Jumping;
         };
 
-        PlayerName = (PlayerID == 1) ? "Player1" : "Player2";
+        PlayerName = PlayerID == 1 ? "Player1" : "Player2";
 
         AssignInputs();
         CallDeferred("FindOpponent");
@@ -54,20 +67,16 @@ public partial class Player : CharacterBody2D
 
         Control hud = GetTree().Root.FindChild("HUD", true, false) as Control;
         if (hud != null)
-        {
             healthBarManager = hud.GetNode<HealthBarManager>("Healthbar");
-        }
-        
+
         if (IsAI)
-        {
-            AIBrain brain = new AIBrain();
-            AddChild(brain);
-        }
+            AddChild(new AIBrain());
     }
+
     public override void _PhysicsProcess(double delta)
     {
-        if (!canMove || _state == PlayerState.KO) return;
-        
+        if (_state == PlayerState.KO) return;
+
         ApplyGravity();
         UpdateFacingDirection();
 
@@ -75,18 +84,12 @@ public partial class Player : CharacterBody2D
         {
             float direction = Input.GetActionStrength(moveRight) - Input.GetActionStrength(moveLeft);
             if (direction != 0)
-            {
-                _state = PlayerState.Moving;
-                _anim.Play((_isFacingRight == (direction > 0)) ? "walk_forward" : "walk_backward");
-            }
+                PlayMovementAnimation(direction);
             else
-            {
-                _state = PlayerState.Idle;
-                _anim.Play("idle");
-            }
+                PlayIdle();
         }
 
-        if (_state != PlayerState.Attacking)
+        if (CanPerformAction())
         {
             HandleJumping();
             HandleMovement();
@@ -95,13 +98,11 @@ public partial class Player : CharacterBody2D
 
         MoveAndSlide();
         CheckLanding();
-        motionBuffer.AddDirection(GetCurrentDirection());
+
+        motionBuffer.AddDirection(motionBuffer.GetCurrentDirection(_isFacingRight, moveLeft, moveRight, down));
     }
-    private void ApplyGravity()
-    {
-        if (!IsOnFloor())
-            Velocity += new Vector2(0, Gravity * (float)GetProcessDeltaTime());
-    }  
+
+    // === INPUT & MOVEMENT ===
     private void AssignInputs()
     {
         if (PlayerID == 1)
@@ -115,169 +116,37 @@ public partial class Player : CharacterBody2D
             attackLP = "p2_LP"; attackLK = "p2_LK"; attackHP = "p2_HP"; attackHK = "p2_HK";
         }
     }
-    private void FindOpponent()
+
+    private void ApplyGravity()
     {
-        foreach (Node node in GetParent().GetChildren())
-        {
-            if (node is Player p && p != this)
-            {
-                opponent = p;
-                break;
-            }
-        }
-    }
-
-    private void UpdateFacingDirection()
-    {
-        if (opponent != null)
-        {
-            bool shouldFaceRight = Position.X < opponent.Position.X;
-
-            if (_isFacingRight != shouldFaceRight)
-            {
-                _isFacingRight = shouldFaceRight;
-
-                GetNode<AnimatedSprite2D>("AnimatedSprite2D").FlipH = !_isFacingRight;
-                
-                var hitboxNode = GetNode<Area2D>("Hitbox");
-                hitboxNode.Scale = new Vector2(_isFacingRight ? 1 : -1, 1);
-
-                var spawnPoint = GetNode<Node2D>("Spawn");
-                spawnPoint.Position = new Vector2(Mathf.Abs(spawnPoint.Position.X) * (_isFacingRight ? 1 : -1), spawnPoint.Position.Y);
-            }
-        }
+        if (!IsOnFloor())
+            Velocity += new Vector2(0, Gravity * (float)GetProcessDeltaTime());
     }
 
     private void HandleMovement()
     {
-        if (_state == PlayerState.Jumping || _state == PlayerState.Attacking)
+        if (!canMove || _state == PlayerState.Jumping || _state == PlayerState.Attacking || _state == PlayerState.Knockdown)
             return;
 
-        bool isCrouching = Input.IsActionPressed(down);
-
-        if (isCrouching)
+        if (Input.IsActionPressed(down))
         {
-            if (_state != PlayerState.Crouching) 
+            if (_state != PlayerState.Crouching)
             {
                 _state = PlayerState.Crouching;
                 _anim.Play("crouch");
                 Velocity = Vector2.Zero;
             }
-            return; 
+            return;
         }
 
         float direction = Input.GetActionStrength(moveRight) - Input.GetActionStrength(moveLeft);
         Velocity = new Vector2(direction * Speed, Velocity.Y);
-
-        if (direction != 0)
-        {
-            _state = PlayerState.Moving;
-            _anim.Play((_isFacingRight == (direction > 0)) ? "walk_forward" : "walk_backward");
-        }
-        else
-        {
-            _state = PlayerState.Idle;
-            _anim.Play("idle");
-        }
+        PlayMovementAnimation(direction);
     }
 
-    public bool IsBlocking()
-    {
-        bool holdingBack = (_isFacingRight && Input.IsActionPressed(moveLeft)) || (!_isFacingRight && Input.IsActionPressed(moveRight));
-        return holdingBack; 
-    }
-    public bool IsCrouching()
-    {
-        return Input.IsActionPressed(down);
-    }
-    public void PlayBlockReaction()
-    {
-        _anim.Play("block");
-        _blockSound?.Play();
-        DisableMovement(0.2f); 
-    }
-    public void PlayCrouchBlockReaction()
-    {
-        _anim.Play("crouch_block");
-        _blockSound?.Play();
-        DisableMovement(0.1f); 
-    }
-
-    public void PlayHitReaction()
-    {
-        _anim.Play("hit");
-        _hitSound.Play();
-        DisableMovement(0.3f); 
-    }
-
-    private void OnAnimationFinished(string animName)
-    {
-        if (animName == "crouch_block")
-        {
-            _state = PlayerState.Crouching;
-            if (_anim.HasAnimation("crouch"))
-            {
-                _anim.Play("crouch");
-                _anim.Seek(0.3f, true); 
-            }
-        }
-
-        if (animName == "ko")
-        {
-            Engine.TimeScale = 1f;
-
-            opponent._anim.Play("Victory");
-        }
-
-        if (animName == "Victory")
-        {
-            EmitSignal(SignalName.VictoryAnimationFinished, this);
-        }
-        }
-
-    public void TakeDamage(int damage)
-    {
-        currentHealth -= damage;
-        if (currentHealth < 0) currentHealth = 0;
-
-        if (healthBarManager != null)
-        {
-            healthBarManager.UpdateHealthBar(PlayerName, currentHealth, MaxHealth);
-        }
-
-        if (currentHealth <= 0)
-        {
-            TriggerKO();
-        }
-    }
-    private void TriggerKO()
-    {
-        canMove = false;
-        _state = PlayerState.KO;
-
-        if (_anim.HasAnimation("ko"))
-            _anim.Play("ko");
-
-        if (opponent != null)
-            opponent.canMove = false;
-
-        Engine.TimeScale = 0.5f;
-    }
-
-    private void DisableMovement(float duration)
-    {
-        canMove = false;
-        GetTree().CreateTimer(duration).Connect("timeout", new Callable(this, nameof(EnableMovement)));
-    }
-
-    private void EnableMovement()
-    {
-        canMove = true;
-    }
- 
     private void HandleJumping()
     {
-        if (_state == PlayerState.Attacking)
+        if (!canMove || _state == PlayerState.Attacking)
             return;
 
         if (IsOnFloor() && Input.IsActionJustPressed(jump))
@@ -297,17 +166,64 @@ public partial class Player : CharacterBody2D
 
     private void CheckLanding()
     {
+        if (_state == PlayerState.Knockdown || _anim.CurrentAnimation == "knockdown") return;
         if (IsOnFloor() && _state == PlayerState.Jumping)
         {
             _state = PlayerState.Idle;
-            _anim.Play("idle");
+            PlayIdle();
         }
     }
 
+    private void PlayMovementAnimation(float direction)
+    {
+        if (direction != 0)
+        {
+            _state = PlayerState.Moving;
+            _anim.Play((_isFacingRight == (direction > 0)) ? "walk_forward" : "walk_backward");
+        }
+        else
+        {
+            _state = PlayerState.Idle;
+            PlayIdle();
+        }
+    }
+
+    private void PlayIdle() => _anim.Play("idle");
+    private bool CanPerformAction() => canMove && _state != PlayerState.Attacking && _state != PlayerState.Knockdown;
+
+    // === FACING ===
+    private void UpdateFacingDirection()
+    {
+        if (opponent == null) return;
+
+        bool shouldFaceRight = Position.X < opponent.Position.X;
+        if (_isFacingRight != shouldFaceRight)
+        {
+            _isFacingRight = shouldFaceRight;
+            GetNode<AnimatedSprite2D>("AnimatedSprite2D").FlipH = !_isFacingRight;
+            GetNode<Area2D>("Hitbox").Scale = new Vector2(_isFacingRight ? 1 : -1, 1);
+
+            var spawnPoint = GetNode<Node2D>("Spawn");
+            spawnPoint.Position = new Vector2(Mathf.Abs(spawnPoint.Position.X) * (_isFacingRight ? 1 : -1), spawnPoint.Position.Y);
+        }
+    }
+
+    private void FindOpponent()
+    {
+        foreach (Node node in GetParent().GetChildren())
+        {
+            if (node is Player p && p != this)
+            {
+                opponent = p;
+                break;
+            }
+        }
+    }
+
+    // === COMBAT ===
     private void HandleAttack()
     {
-        if (_state == PlayerState.Attacking || !IsOnFloor())
-            return;
+        if (!canMove || _state == PlayerState.Attacking || !IsOnFloor()) return;
 
         if (Input.IsActionJustPressed(attackLP)) PerformAttack("LP");
         if (Input.IsActionJustPressed(attackLK)) PerformAttack("LK");
@@ -315,6 +231,7 @@ public partial class Player : CharacterBody2D
         if (Input.IsActionJustPressed(attackHK)) PerformAttack("HK");
 
         string[] hadouken = { "down", "down_forward", "forward" };
+        string[] shoryuken = { "forward", "down", "down_forward" };
 
         if (motionBuffer.MatchesPattern(hadouken) && Input.IsActionJustPressed(attackLP))
         {
@@ -322,70 +239,161 @@ public partial class Player : CharacterBody2D
             motionBuffer.Clear();
             return;
         }
+        if (motionBuffer.MatchesPattern(shoryuken) && Input.IsActionJustPressed(attackHP))
+        {
+            PerformShoryuken();
+            motionBuffer.Clear();
+            return;
+        }
     }
+
     private void PerformAttack(string attackType)
     {
         _state = PlayerState.Attacking;
         Velocity = Vector2.Zero;
         _anim.Play(attackType);
-        _attackSound?.Play();
+        soundManager?.PlayAttack();
         _attackCooldown.Start(0.4f);
     }
 
-    public Texture2D GetPortrait()
-    {
-        return PortraitTexture;
-    }
-
     private void PerformHadouken()
-{
-    _state = PlayerState.Attacking;
-    Velocity = Vector2.Zero;
-    _anim.Play("hadouken");
-    _attackCooldown.Start(0.8f); 
-
-}
-
-public void SpawnHadouken()
-{
-    GD.Print($"{PlayerName} is spawning Hadouken!");
-    if (hadoukenScene == null) return;
-
-    Hadouken hadouken = (Hadouken)hadoukenScene.Instantiate();
-
-    Node2D spawnPoint = GetNode<Node2D>("Spawn");
-    hadouken.Position = spawnPoint.GlobalPosition;
-
-    hadouken.SetDirection(_isFacingRight ? Vector2.Right : Vector2.Left);
-
-    // Pass ownership info
-    hadouken.PlayerID = PlayerID;
-
-    GetTree().Root.AddChild(hadouken);
-}
-
-private string GetCurrentDirection()
-{
-    bool left = Input.IsActionPressed(moveLeft);
-    bool right = Input.IsActionPressed(moveRight);
-    bool downPressed = Input.IsActionPressed(down);
-
-    if (_isFacingRight)
     {
-        if (downPressed && right) return "down_forward";
-        if (downPressed && left) return "down_back";
-        if (downPressed) return "down";
-        if (right) return "forward";
-        if (left) return "back";
+        _state = PlayerState.Attacking;
+        Velocity = Vector2.Zero;
+        _anim.Play("hadouken");
+        soundManager?.PlayHadouken();
+        _attackCooldown.Start(0.8f);
     }
-    else
+
+    public void SpawnHadouken()
     {
-        if (downPressed && left) return "down_forward";
-        if (downPressed && right) return "down_back";
-        if (downPressed) return "down";
-        if (left) return "forward";
-        if (right) return "back";
+        GD.Print($"{PlayerName} is spawning Hadouken!");
+        if (hadoukenScene == null) return;
+
+        Hadouken hadouken = (Hadouken)hadoukenScene.Instantiate();
+        hadouken.Position = GetNode<Node2D>("Spawn").GlobalPosition;
+        hadouken.SetDirection(_isFacingRight ? Vector2.Right : Vector2.Left);
+        hadouken.PlayerID = PlayerID;
+
+        GetTree().Root.AddChild(hadouken);
     }
-    return "";
-}
+
+    private void PerformShoryuken()
+    {
+        _state = PlayerState.Attacking;
+        Velocity = new Vector2(0, JumpForce * 0.4f);
+        _anim.Play("Shoryuken");
+        soundManager?.PlayShoryu();
+        _attackCooldown.Start(0.7f);
+    }
+
+    // === COMBAT REACTIONS ===
+    public void TakeDamage(int damage)
+    {
+        currentHealth = Mathf.Max(currentHealth - damage, 0);
+        healthBarManager?.UpdateHealthBar(PlayerName, currentHealth, MaxHealth);
+
+        if (currentHealth <= 0)
+            TriggerKO();
+    }
+
+    private void TriggerKO()
+    {
+        canMove = false;
+        _state = PlayerState.KO;
+        if (_anim.HasAnimation("ko")) _anim.Play("ko");
+        if (opponent != null) opponent.canMove = false;
+        Engine.TimeScale = 0.5f;
+    }
+
+    public void PlayBlockReaction()
+    {
+        _anim.Play("block");
+        soundManager?.PlayBlock();
+        DisableMovement(0.2f);
+    }
+
+    public void PlayCrouchBlockReaction()
+    {
+        _anim.Play("crouch_block");
+        soundManager?.PlayBlock();
+        DisableMovement(0.1f);
+    }
+
+    public void PlayHitReaction()
+    {
+        _anim.Play("hit");
+        soundManager?.PlayHit();
+        DisableMovement(0.3f);
+    }
+
+    public void PlayAirHitReaction(string attackerName)
+    {
+        if (!canMove) return;
+
+        _anim.Play("knockdown");
+        _state = PlayerState.Knockdown;
+
+        Vector2 knockback = new Vector2();
+        if (opponent != null && opponent.PlayerName == attackerName)
+            knockback.X = (Position.X < opponent.Position.X) ? -300 : 300;
+
+        knockback.Y = -200;
+        Velocity = knockback;
+
+        DisableMovement(0.5f);
+    }
+
+    private void DisableMovement(float duration)
+    {
+        canMove = false;
+        GetTree().CreateTimer(duration).Connect("timeout", new Callable(this, nameof(EnableMovement)));
+    }
+
+    private void EnableMovement() => canMove = true;
+    private void DisableMovementAfterKnockback() => DisableMovement(0.3f);
+    private void ExitHitStun() => isInHitStun = false;
+
+    // === ANIMATION EVENTS ===
+    private void OnAnimationFinished(string animName)
+    {
+        if (animName == "crouch_block")
+        {
+            _state = PlayerState.Crouching;
+            if (_anim.HasAnimation("crouch"))
+            {
+                _anim.Play("crouch");
+                _anim.Seek(0.3f, true);
+            }
+        }
+
+        if (animName == "ko")
+        {
+            Engine.TimeScale = 1f;
+            opponent?._anim.Play("Victory");
+            soundManager?.PlayVictory();
+        }
+
+        if (animName == "Victory")
+            EmitSignal(SignalName.VictoryAnimationFinished, this);
+
+        if (animName == "knockdown")
+            GetTree().CreateTimer(0.1f).Connect("timeout", new Callable(this, nameof(FinishKnockdown)));
+    }
+
+    private void FinishKnockdown()
+    {
+        _state = IsOnFloor() ? PlayerState.Idle : PlayerState.Jumping;
+        _anim.Play(_state == PlayerState.Idle ? "idle" : "jump");
+    }
+
+    // === HELPERS ===
+    public bool IsBlocking()
+    {
+        bool holdingBack = (_isFacingRight && Input.IsActionPressed(moveLeft)) || (!_isFacingRight && Input.IsActionPressed(moveRight));
+        return holdingBack;
+    }
+
+    public bool IsCrouching() => Input.IsActionPressed(down);
+    public Texture2D GetPortrait() => PortraitTexture;
 }

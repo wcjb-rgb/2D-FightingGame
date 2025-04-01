@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b0bhsqqjacjih"
-path="res://.godot/imported/147941.png-64e3bb0d10a5b1a1995bf8a593e2c1a9.ctex"
+uid="uid://crpn08151f3qh"
+path="res://.godot/imported/12.png-94b3c8ca37bbe5e82e84c9c43820bfab.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/HUD-Elements/147941.png"
-dest_files=["res://.godot/imported/147941.png-64e3bb0d10a5b1a1995bf8a593e2c1a9.ctex"]
+source_file="res://Assets/Ken/KO/12.png"
+dest_files=["res://.godot/imported/12.png-94b3c8ca37bbe5e82e84c9c43820bfab.ctex"]
 
 [params]
 

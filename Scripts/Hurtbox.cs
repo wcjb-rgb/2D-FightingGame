@@ -86,6 +86,7 @@ public partial class Hurtbox : Area2D
 
         bool isBlocked = playerScript.IsBlocking();
         bool isCrouching = playerScript.IsCrouching();
+        
 
         if (isBlocked)
         {
@@ -110,10 +111,17 @@ public partial class Hurtbox : Area2D
             }
         }
         else
-        {
-            playerScript.PlayHitReaction();
-            playerScript.TakeDamage(damage);
-        }
+{
+    if (!playerScript.IsOnFloor())
+    {
+        playerScript.PlayAirHitReaction(attack.PlayerName);
+    }
+    else
+    {
+        playerScript.PlayHitReaction();
+    }
+    playerScript.TakeDamage(damage);
+}
         }
     private Node GetPlayerNodeFromHitbox(Area2D hitbox)
     {

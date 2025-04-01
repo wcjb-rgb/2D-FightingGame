@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://5rhb1ropqxa4"]
+
+[ext_resource type="AudioStream" uid="uid://djhct5d7c31nh" path="res://Assets/Sound/sfii-43-strong-hit-101soundboards.mp3" id="1_m0yhv"]
+[ext_resource type="Script" path="res://Scripts/SoundManager.cs" id="1_n608w"]
+[ext_resource type="AudioStream" uid="uid://c7841ta3t1wu7" path="res://Assets/Sound/sfii-51-blocked-101soundboards.mp3" id="2_n84du"]
+[ext_resource type="AudioStream" uid="uid://ckmtk33ssaw8f" path="res://Assets/Sound/sfii-39-medium-attack-101soundboards.mp3" id="3_jhcji"]
+
+[node name="SoundManager" type="Node"]
+script = ExtResource("1_n608w")
+
+[node name="Hit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("1_m0yhv")
+volume_db = 10.0
+
+[node name="Block" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_n84du")
+volume_db = 9.0
+
+[node name="Attack" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_jhcji")
+volume_db = 10.0
+
+[node name="Shoryu" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_jhcji")
+volume_db = 10.0
+
+[node name="Hadouken" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_jhcji")
+volume_db = 10.0
+
+[node name="Victory" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_jhcji")
+volume_db = 10.0

@@ -1154,7 +1154,7 @@ PortraitTexture = ExtResource("2_l5r7m")
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_a86ej")
-animation = &"LP"
+animation = &"idle"
 frame = 1
 
 [node name="AnimationPlayer" parent="." index="1"]
@@ -1167,8 +1167,8 @@ position = Vector2(4.31818, 1.36364)
 shape = SubResource("RectangleShape2D_3m5no")
 
 [node name="Detect" parent="." index="3"]
-visible = false
 position = Vector2(1.81818, 17.9545)
+polygon = PackedVector2Array(49.5455, -16.5909, -2.27273, 26.591, -55.9091, -19.3181, 0.454547, -79.7727)
 
 [node name="Hand" parent="Hitbox" index="0"]
 position = Vector2(39.5455, -54.0909)
@@ -1178,3 +1178,5 @@ one_way_collision = false
 [node name="Feet" parent="Hitbox" index="1"]
 position = Vector2(60.9091, -40.4545)
 shape = SubResource("RectangleShape2D_kqnnh")
+
+[node name="Spawn" type="Node2D" parent="." index="7"]

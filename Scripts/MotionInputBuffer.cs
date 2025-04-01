@@ -14,7 +14,6 @@ public partial class MotionInputBuffer : Node
             Time = time;
         }
     }
-
     private List<InputBufferEntry> inputBuffer = new();
     private float inputBufferDuration = 0.3f;
     public void AddDirection(string direction)
@@ -42,6 +41,32 @@ public partial class MotionInputBuffer : Node
         }
         return false;
     }
+
+    public string GetCurrentDirection(bool isFacingRight, string moveLeft, string moveRight, string down)
+    {
+        bool left = Input.IsActionPressed(moveLeft);
+        bool right = Input.IsActionPressed(moveRight);
+        bool downPressed = Input.IsActionPressed(down);
+
+        if (isFacingRight)
+        {
+            if (downPressed && right) return "down_forward";
+            if (downPressed && left) return "down_back";
+            if (downPressed) return "down";
+            if (right) return "forward";
+            if (left) return "back";
+        }
+        else
+        {
+            if (downPressed && left) return "down_forward";
+            if (downPressed && right) return "down_back";
+            if (downPressed) return "down";
+            if (left) return "forward";
+            if (right) return "back";
+        }
+        return "";
+    }
+
     public void Clear()
     {
         inputBuffer.Clear();
