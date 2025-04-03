@@ -68,9 +68,14 @@ public partial class Player : CharacterBody2D
         Control hud = GetTree().Root.FindChild("HUD", true, false) as Control;
         if (hud != null)
             healthBarManager = hud.GetNode<HealthBarManager>("Healthbar");
-
+            
+        var global = GetNode<Global>("/root/Main");
+        IsAI = global.Player2IsAI;
         if (IsAI)
-            AddChild(new AIBrain());
+        {
+			AIBehaviour AIBrain = new AIBehaviour();
+			AddChild(AIBrain);
+        }
     }
 
     public override void _PhysicsProcess(double delta)
