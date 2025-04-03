@@ -22,21 +22,21 @@ public partial class AIBehaviour : CharacterBody2D
 
 	public override void _PhysicsProcess(double delta)
 	{
-		HandleMovement(delta);
+		HandleMovement();
 		HandleAttack();
 	}
 
-	private void HandleMovement(double delta)
+	private void HandleMovement()
 	{
 		float direction = AIplayer.Position.X - player.Position.X;
 		if (direction > 0)
 		{
-			Velocity = new Vector2(AISpeed,Velocity.Y);
+			Velocity = new Vector2(direction * AISpeed,Velocity.Y);
 			_anim.Play("walk_forward");
 		}
 		else if (direction < 0)
 		{
-			Velocity = new Vector2(-AISpeed, Velocity.Y);
+			Velocity = new Vector2(direction * AISpeed, Velocity.Y);
 			_anim.Play("walk_backward");
 		}
 		else
@@ -49,6 +49,7 @@ public partial class AIBehaviour : CharacterBody2D
 	{
 		string[] choices = {"LP", "LK", "HP", "HK"};
 		string attack = choices[GD.RandRange(0, 3)];
+
 		if (AIplayer.Position.DistanceTo(player.Position) <range && !attacking)
 		{
 			if (GD.RandRange(0,100) < 50)
@@ -56,7 +57,7 @@ public partial class AIBehaviour : CharacterBody2D
 				attacking = true;
 				AIplayer.PerformAttack(attack);
 			}
-			else if (GD.RandRange(0,100) < 10)
+			else if (GD.RandRange(0,100) < 10 && !attacking)
 			{
 				_anim.Play("forward_jump");
 			}
