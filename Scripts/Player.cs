@@ -247,7 +247,7 @@ public partial class Player : CharacterBody2D
         }
     }
 
-    private void PerformAttack(string attackType)
+    public void PerformAttack(string attackType)
     {
         _state = PlayerState.Attacking;
         Velocity = Vector2.Zero;
