@@ -8,9 +8,10 @@ public partial class AIBehaviour : CharacterBody2D
 	private float AISpeed = 380f;
 	private float range = 50f;
 	private bool attacking = false;
+	private Random _random;
 
 	private AnimationPlayer _anim;
-
+	
 	public override void _Ready()
 	{
 		AIplayer = (Player)GetParent();
@@ -44,12 +45,21 @@ public partial class AIBehaviour : CharacterBody2D
 			_anim.Play("idle");        }
 	}
 
-	private void HandleAttack()
+	public void HandleAttack()
 	{
+		string[] choices = {"LP", "LK", "HP", "HK"};
+		string attack = choices[GD.RandRange(0, 3)];
 		if (AIplayer.Position.DistanceTo(player.Position) <range && !attacking)
 		{
-			attacking = true;
-			AIplayer.PerformAttack("LP");
+			if (GD.RandRange(0,100) < 50)
+			{
+				attacking = true;
+				AIplayer.PerformAttack(attack);
+			}
+			else if (GD.RandRange(0,100) < 10)
+			{
+				_anim.Play("forward_jump");
+			}
 		} 
-	}
+	} 
 }
