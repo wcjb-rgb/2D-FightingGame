@@ -1,10 +1,13 @@
-[gd_scene load_steps=15 format=3 uid="uid://yllcr4j4s2i5"]
+[gd_scene load_steps=21 format=3 uid="uid://yllcr4j4s2i5"]
 
 [ext_resource type="Script" path="res://Scripts/Main.cs" id="1_cjw64"]
 [ext_resource type="Texture2D" uid="uid://dwda40qiahvcl" path="res://Assets/MainMenu/undefined-Imgur-ezgif.com-gif-to-sprite-converter.png" id="2_gdkb5"]
 [ext_resource type="Texture2D" uid="uid://comhj5moqfg0l" path="res://Assets/MainMenu/Button/vsmode2.png" id="5_3jctv"]
 [ext_resource type="Texture2D" uid="uid://cdicyamg0unff" path="res://Assets/MainMenu/Button/vsmode1.png" id="6_kld78"]
-[ext_resource type="Script" path="res://texture_button.gd" id="7_v540l"]
+[ext_resource type="Texture2D" uid="uid://5eeawjcfdb86" path="res://Assets/MainMenu/Button/trainmode2.png" id="6_oyfl6"]
+[ext_resource type="Texture2D" uid="uid://dm8s0evm5py6q" path="res://Assets/MainMenu/Button/trainmode1.png" id="7_nusje"]
+[ext_resource type="FontFile" uid="uid://bnr3daevodt7n" path="res://Assets/Stage/The Impostor.ttf" id="8_50ppv"]
+[ext_resource type="AudioStream" uid="uid://c4ewg4nxj6u2u" path="res://Assets/Sound/Ibuki's Theme - Twilight [SF III.3].wav" id="9_pj42s"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_x7ax4"]
 atlas = ExtResource("2_gdkb5")
@@ -70,7 +73,45 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Main" type="Control"]
+[sub_resource type="Animation" id="Animation_upmnx"]
+resource_name = "Float"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(175, 277.5), Vector2(175, 240), Vector2(175, 275)]
+}
+
+[sub_resource type="Animation" id="Animation_166vl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(212, 240)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1urit"]
+_data = {
+"Float": SubResource("Animation_upmnx"),
+"RESET": SubResource("Animation_166vl")
+}
+
+[node name="Main" type="Control" node_paths=PackedStringArray("AnimPlayer")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -78,6 +119,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_cjw64")
+AnimPlayer = NodePath("AnimationPlayer")
 
 [node name="Background" type="AnimatedSprite2D" parent="."]
 position = Vector2(640, 360)
@@ -86,24 +128,70 @@ sprite_frames = SubResource("SpriteFrames_u2d1l")
 frame = 3
 frame_progress = 0.662977
 
-[node name="TextureButton" type="TextureButton" parent="."]
+[node name="Label" type="Label" parent="."]
 layout_mode = 1
-anchors_preset = -1
+anchors_preset = 8
 anchor_left = 0.5
-anchor_top = 0.532
+anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.532
-offset_left = -111.0
-offset_top = 91.96
-offset_right = 126.0
-offset_bottom = 161.96
+anchor_bottom = 0.5
+offset_left = -465.0
+offset_top = -82.5
+offset_right = 465.0
+offset_bottom = 82.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 14
+theme_override_constants/outline_size = 7
+theme_override_fonts/font = ExtResource("8_50ppv")
+theme_override_font_sizes/font_size = 120
+text = "KNOCK OUT!"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_1urit")
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_pj42s")
+volume_db = -12.584
+autoplay = true
+
+[node name="VS" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -123.5
+offset_top = 140.0
+offset_right = 123.5
+offset_bottom = 208.0
+grow_horizontal = 2
+grow_vertical = 2
 texture_normal = ExtResource("5_3jctv")
 texture_pressed = ExtResource("6_kld78")
 texture_hover = ExtResource("6_kld78")
 stretch_mode = 0
-script = ExtResource("7_v540l")
-normal_texture = ExtResource("5_3jctv")
-hover_texture = ExtResource("6_kld78")
-pressed_texture = ExtResource("6_kld78")
 
-[connection signal="pressed" from="TextureButton" to="TextureButton" method="_on_pressed"]
+[node name="SinglePlayer" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -122.0
+offset_top = 223.0
+offset_right = 125.0
+offset_bottom = 291.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("6_oyfl6")
+texture_pressed = ExtResource("7_nusje")
+texture_hover = ExtResource("7_nusje")
+stretch_mode = 0

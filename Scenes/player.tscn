@@ -9,6 +9,8 @@ scale = Vector2(2.2, 2.2)
 collision_layer = 64
 collision_mask = 192
 script = ExtResource("1_jfecq")
+JumpForce = -1100.0
+Gravity = 1850.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 
@@ -22,7 +24,7 @@ script = ExtResource("2_xkj04")
 
 [node name="hurtbox" type="CollisionShape2D" parent="Hurtbox"]
 
-[node name="Detect" type="CollisionShape2D" parent="."]
+[node name="Detect" type="CollisionPolygon2D" parent="."]
 
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 8

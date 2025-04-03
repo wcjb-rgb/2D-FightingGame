@@ -9,8 +9,6 @@ public partial class CameraController : Camera2D
 
     private Player player1;
     private Player player2;
-
-
     public override void _Process(double delta)
     {
         if (player1 == null || player2 == null)
@@ -29,7 +27,6 @@ public partial class CameraController : Camera2D
         Position = Position.Lerp(targetPosition, (float)delta * CameraSpeed);
 
     }
-
     private void FindPlayers()
     {
         foreach (Node node in GetTree().GetNodesInGroup("Players"))

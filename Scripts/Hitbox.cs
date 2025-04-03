@@ -1,12 +1,12 @@
 using Godot;
 using System.Collections.Generic;
 
-public partial class Hitbox : Area2D
+public partial class Hitbox : Area2D, IAttackSource
 {
-    [Export] public int Damage = 10;
-    public string PlayerName;
+    [Export] public int Damage { get; set; } = 15;
+    public string PlayerName { get; set; }
+    public bool CanDealChipDamage => false;
     private List<CollisionShape2D> hitboxShapes = new List<CollisionShape2D>();
-
     public override void _Ready()
     {
         AssignPlayerName();
@@ -51,26 +51,25 @@ public partial class Hitbox : Area2D
         SetDeferred("collision_mask", GetCollisionMask());
 
     }
-
     private void AssignPlayerName()
-{
-    Node playerNode = GetParent();
-    if (playerNode == null)
     {
-        return;
-    }
+        Node playerNode = GetParent();
+        if (playerNode == null)
+        {
+            return;
+        }
 
-    int playerID = playerNode.Get("PlayerID").AsInt32();
+        int playerID = playerNode.Get("PlayerID").AsInt32();
 
-    if (playerID == 1)
-    {
-        PlayerName = "Player1";
+        if (playerID == 1)
+        {
+            PlayerName = "Player1";
+        }
+        else if (playerID == 2)
+        {
+            PlayerName = "Player2";
+        }
     }
-    else if (playerID == 2)
-    {
-        PlayerName = "Player2";
-    }
-}
 
     private Node GetPlayerNode()
     {
@@ -81,7 +80,6 @@ public partial class Hitbox : Area2D
         }
         return node;
     }
-
     private void OnHitDetected(Area2D hurtbox)
     {
         Node opponentPlayer = GetPlayerNodeFromHurtbox(hurtbox);
@@ -92,7 +90,6 @@ public partial class Hitbox : Area2D
         {
             return; 
         }
-
     }
     private Node GetPlayerNodeFromHurtbox(Area2D hurtbox)
     {
